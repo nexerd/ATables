@@ -11,6 +11,11 @@ var LogStream = fs.createWriteStream(__dirname + "/logger.log", {flags: 'w'});
 
 var app = express();
 
+
+var CommandController = require("./controllers/ComandControllers");
+var dbController = require("./model/dbControllers");
+var Router = require("./routes/Router");
+
 app.set("port", process.env.PORT || 8000)
 app.set("views", __dirname + "/views");
 app.set("view exgine", "jade");
@@ -25,6 +30,13 @@ app.get("/", function(req, res) {
 	res.render("index.jade", {title: "Ads Table", text: "Hellow World!"});
 	});
 
+var reqController = new CommandController.createRequestController();
+var SequnceController = new dbController.createSequnceController(null);
+dbController.AddAllActioner(SequnceController);
+reqController.addSequnce("Departments", SequnceController);
+Router.mapRoute(app, reqController);
+
+
 app.use(function(req, res, next){
 		throw new Error(req.url + " not found :(");
 	});
@@ -32,6 +44,9 @@ app.use(function(err, req, res, next){
 		console.log(err);
 		res.send(err);
 	});
+
+
+
 	
 
 http.createServer(app).listen(app.get("port"), function()
