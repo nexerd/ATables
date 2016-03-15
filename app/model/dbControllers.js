@@ -2,6 +2,8 @@ var eventEmmitter = require("events");
 var util = require("util");
 var mongodb = require("mongodb")
 
+var url = "mongodb://localhost:27017/ATableTest0";
+
 function createSequnceController(ObjListener)
 {
 	this.Actioners = {}
@@ -10,9 +12,8 @@ function createSequnceController(ObjListener)
 	};
 	this.on("PushAction", function(ObjSender) {		
 		var command = ObjSender.pop();
-		console.log(command);		
-		console.log(this.Actioners);	
-		var Act = new this.Actioners[command.collection.toString()];		
+		var Actioner = new this.Actioners[command.collection.toString()];		
+		Actioner.readDepartmentByName(command.obj.Type, command.obj.Name)
 	});
 }
 createSequnceController.prototype = eventEmmitter.prototype;
@@ -20,31 +21,35 @@ createSequnceController.prototype = eventEmmitter.prototype;
 exports.createSequnceController = createSequnceController;
 
 function createDepartmentActioner()
-{
-	var server = new mongodb.Server("localhost", 27017, {auto_reconnect: true});
-	this.db = new mongodb.Db("ATableTest0", server);
+{	
 
 }
 createDepartmentActioner.prototype = { 
 
+	actionDB: function(act)
+	{
+		var MongoClient = mongodb.MongoClient;	
+		this.db;
+		MongoClient.connect(url, function(err, _db){
+			act()
+		})
+	}
+
 	readDepartmentByName: function(type, name)
 	{
-		db.collection("Departments", function(err, collection){
-			var department = collection.findOne({Type: type, Name: name});
-			console.log(department);
-		});
+		console.log(this.db);
+		var department = this.db.collection("Departments").findOne({Type: type, Name: name});
+		console.log(department);			
 	},
 
 	readDepartmentById: function(id)
 	{
-		db.collection("Departments", function(err, collection){
-			var department = collection.findOne({_id: id});
-			console.log(department);
-		});
+		var department = this.db.collection("Departments").findOne({_id: id});
+		console.log(department);
 	}
 };
 
 exports.AddAllActioner = function(SequnceController)
 {
-	SequnceController.createActioner("Department", createDepartmentActioner);
+	SequnceController.createActioner("Departments", createDepartmentActioner);
 }

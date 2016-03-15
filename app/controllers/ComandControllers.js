@@ -51,6 +51,8 @@ function createRequestController()
 {	
 	this.Sequnces = {};
 	this.PushCommand = function(command){	
+		//console.log(this.Sequnces);
+		//console.log(command.collection.toString());
 		this.Sequnces[command.collection.toString()].push(command);
 	};
 	this.addSequnce = function(name, ObjListener)
