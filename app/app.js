@@ -7,21 +7,22 @@ var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var fs = require("fs");
 
-var LogStream = fs.createWriteStream(__dirname + "/logger.log", {flags: 'w'});
+//var LogStream = fs.createWriteStream(__dirname + "/logger.log", {flags: 'w'});
 
 var app = express();
-
-
-var CommandController = require("./controllers/ComandControllers");
-var dbController = require("./model/dbControllers");
 var Router = require("./routes/Router");
+var CommandInvoker = require("./model/CommandInvoker");
+var types = ["Departments"];
+types.forEach(CommandInvoker.addInvoker);
+types.forEach(function(prefix) { Router.mapRoute(app, prefix) });
+
 
 app.set("port", process.env.PORT || 8000)
 app.set("views", __dirname + "/views");
 app.set("view exgine", "jade");
 
 app.use(favicon(__dirname + "/public/favicon.ico"));
-app.use(logger("dev", {stream: LogStream}));
+app.use(logger("dev"));//, {stream: LogStream}));
 app.use(static(__dirname + "/public"));
 app.use(bodyParser());
 app.use(methodOverride());
@@ -29,12 +30,6 @@ app.use(methodOverride());
 app.get("/", function(req, res) {
 	res.render("index.jade", {title: "Ads Table", text: "Hellow World!"});
 	});
-
-var reqController = new CommandController.createRequestController();
-var SequnceController = new dbController.createSequnceController(null);
-dbController.AddAllActioner(SequnceController);
-reqController.addSequnce("Departments", SequnceController);
-Router.mapRoute(app, reqController);
 
 
 app.use(function(req, res, next){
