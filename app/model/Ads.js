@@ -14,36 +14,24 @@ exports.createInvoker = function ()
 			}
 			else
 			{
-				var collection = db.collection("Departments");	
-				if (params.Name)
+				var collection = db.collection("Ads");	
+				if (params.Date)
 				{				
-					var request = { Type: "Факультет",	Name: params.Name };
+					var request = { Date : { $gt : params.Date} };
 				}
 				else if (params.Id)
 				{
 					var ObjectID = require("mongodb").ObjectID;
 					var request = { _id: ObjectID(params.Id) };
 				}
-				else if (params.Type)
-				{
-					var request = { Type: params.Type };
-				}
-				collection.find(request, function(err, doc){
+				collection.findOne(request, function(err, doc){
 					if (err)
 					{
 						eventEmitter.emit("error", err);
-						db.close();
 					}
 					else
-					{
-						doc.toArray(function(err, items)
-							 {
-							 	//console.log(items);
-							 	eventEmitter.emit("success", items);
-							 	db.close();
-							 });						
-					}
-					
+						eventEmitter.emit("success", doc);
+					db.close();
 				});
 			}
 			

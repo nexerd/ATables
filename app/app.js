@@ -12,7 +12,7 @@ var fs = require("fs");
 var app = express();
 var Router = require("./routes/Router");
 var CommandInvoker = require("./model/CommandInvoker");
-var types = ["Departments"];
+var types = ["Departments", "Ads"];
 types.forEach(CommandInvoker.addInvoker);
 types.forEach(function(prefix) { Router.mapRoute(app, prefix) });
 
@@ -28,7 +28,20 @@ app.use(bodyParser());
 app.use(methodOverride());
 
 app.get("/", function(req, res) {
-	res.render("index.jade", {title: "Ads Table", text: "Hellow World!"});
+	var CFabric = require("./controllers/commandFabric");
+	var Invoker = require("./model/CommandInvoker");
+	var command = CFabric.commandFabric("Departments", "Read", { Type: "Факультет"});
+	var invokeAns = Invoker.invoke(command);		
+	invokeAns.on("success", function(ans){		
+		console.log(ans);
+		res.render("index.jade", 
+			{
+				title: "Ads Table",
+				text: "Hellow World!",
+				Faculties: ans
+			});
+	});
+	
 	});
 
 

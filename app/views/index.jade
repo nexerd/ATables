@@ -1,3 +1,5 @@
 extends layout
 block content
 	h1 #{text}
+	- each item in Faculties
+		a(href="Departments/"+item.Name)= item.Name
