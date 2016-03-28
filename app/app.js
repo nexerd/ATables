@@ -33,11 +33,10 @@ app.get("/", function(req, res) {
 	var command = CFabric.commandFabric("Departments", "Read", { Type: "Факультет"});
 	var invokeAns = Invoker.invoke(command);		
 	invokeAns.on("success", function(ans){		
-		console.log(ans);
 		res.render("index.jade", 
 			{
 				title: "Ads Table",
-				text: "Hellow World!",
+				text: "Hello World!",
 				Faculties: ans
 			});
 	});

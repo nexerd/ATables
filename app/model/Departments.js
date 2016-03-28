@@ -15,19 +15,29 @@ exports.createInvoker = function ()
 			else
 			{
 				var collection = db.collection("Departments");	
-				if (params.Name)
+				if (params.Name && params.Type)
 				{				
-					var request = { Type: "Факультет",	Name: params.Name };
+					var request = { Type: params.Type,	Name: params.Name };
 				}
 				else if (params.Id)
 				{
 					var ObjectID = require("mongodb").ObjectID;
 					var request = { _id: ObjectID(params.Id) };
 				}
+				else if (params.BaseDepartment)
+				{
+					var ObjectID = require("mongodb").ObjectID;
+					var request = { BaseDepartment: params.BaseDepartment.toString() };
+				}
 				else if (params.Type)
 				{
 					var request = { Type: params.Type };
 				}
+				else
+					throw "Empty request!";
+
+				console.log("\nrequest:");
+				console.log(request);
 				collection.find(request, function(err, doc){
 					if (err)
 					{
@@ -38,7 +48,7 @@ exports.createInvoker = function ()
 					{
 						doc.toArray(function(err, items)
 							 {
-							 	//console.log(items);
+							 	console.log(items);
 							 	eventEmitter.emit("success", items);
 							 	db.close();
 							 });						
