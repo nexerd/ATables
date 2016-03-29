@@ -12,9 +12,8 @@ var fs = require("fs");
 var app = express();
 var Router = require("./routes/Router");
 var CommandInvoker = require("./model/CommandInvoker");
-var types = ["Departments", "Ads"];
-types.forEach(CommandInvoker.addInvoker);
-types.forEach(function(prefix) { Router.mapRoute(app, prefix) });
+var types = ["Departments", "Ads", "Tables"];
+
 
 
 app.set("port", process.env.PORT || 8000)
@@ -26,6 +25,9 @@ app.use(logger("dev"));//, {stream: LogStream}));
 app.use(static(__dirname + "/public"));
 app.use(bodyParser());
 app.use(methodOverride());
+
+types.forEach(CommandInvoker.addInvoker);
+types.forEach(function(prefix) { Router.mapRoute(app, prefix) });
 
 app.get("/", function(req, res) {
 	var CFabric = require("./controllers/commandFabric");

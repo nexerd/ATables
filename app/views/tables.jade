@@ -1,0 +1,12 @@
+extends layout
+block content
+	h1 Доска объявлений: #{Table.Name}
+	- if (Ads)
+		- each Ad in Ads
+			div
+				p= "Тема: " + Ad.Name
+				p= "Объявление: " + Ad.Text
+				p= "Метка: " + Ad.Tag
+				p= "Дата: " + Ad.Date
+				p= "============================================"
+				p

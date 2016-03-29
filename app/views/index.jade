@@ -3,4 +3,4 @@ block content
 	h1 #{text}
 	- each item in Faculties
 		p
-			a(href="Departments/Факультет/"+item.Name)= item.Name
+			a(href="Departments/"+item._id)= item.Name

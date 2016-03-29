@@ -14,36 +14,27 @@ exports.createInvoker = function ()
 			}
 			else
 			{
-				var collection = db.collection("Ads");	
+				var collection = db.collection("Tables");	
 				if (params.Id)
 				{
 					var ObjectID = require("mongodb").ObjectID;
 					var request = { _id: ObjectID(params.Id) };
 				}
-				else if (params.Table)
-				{
-					var ObjectID = require("mongodb").ObjectID;
-					var request = { Table: ObjectID(params.Table.toString()) };
-				}
 				else
 					throw "Empty request!";
 
-				//console.log("\nAds collection find:");
+				//console.log("\nTables collection find:");
 				//console.log(request);
-				collection.find(request, function(err, doc){
+				collection.findOne(request, function(err, doc){
 					if (err)
 					{
 						eventEmitter.emit("error", err);
 					}
 					else
 					{
-						doc.limit(10).sort({ Date : -1 }).toArray(function(err, items)
-							 {
-							 	//console.log(items);
-							 	eventEmitter.emit("success", items);
-							 	db.close();
-							 });	
+						eventEmitter.emit("success", doc);						
 					}
+					db.close();					
 				});
 			}
 			

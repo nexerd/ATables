@@ -36,8 +36,8 @@ exports.createInvoker = function ()
 				else
 					throw "Empty request!";
 
-				console.log("\nrequest:");
-				console.log(request);
+				//console.log("\nDepartment collection find:");
+				//console.log(request);
 				collection.find(request, function(err, doc){
 					if (err)
 					{
@@ -48,7 +48,7 @@ exports.createInvoker = function ()
 					{
 						doc.toArray(function(err, items)
 							 {
-							 	console.log(items);
+							 	//console.log(items);
 							 	eventEmitter.emit("success", items);
 							 	db.close();
 							 });						

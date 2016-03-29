@@ -2,7 +2,7 @@ extends layout
 block content
 	h1 #{BaseDepartment.Type} : #{BaseDepartment.Name} 
 	p
-		a(href="http://127.0.0.1:8000/Tables/"+ BaseDepartment._id) Доска объявлений
+		a(href="http://127.0.0.1:8000/Tables/"+ BaseDepartment.TableId) Доска объявлений
 	- each SubDepartment in SubDepartments
 		p
 			a(href="http://127.0.0.1:8000/Departments/"+SubDepartment._id)= SubDepartment.Type + ' ' + SubDepartment.Name

@@ -3,28 +3,26 @@ var Invoker = require("../../model/CommandInvoker")
 
 exports.show = function(req, res, next)
 {
-	var command = CFabric.commandFabric("Departments", "Read", { Id: req.params.Id } );
+	var command = CFabric.commandFabric("Tables", "Read", { Id: req.params.Id } );
 	var invokeAns = Invoker.invoke(command);	
 	invokeAns.on("error", function(err){
 		console.log("Error:\n");
 		console.log(err);
 	});
-	invokeAns.on("success", function(Departments){
-		//console.log(ans);
-		var BaseDepartment = Departments[0];
-		var command = CFabric.commandFabric("Departments", "Read", { BaseDepartment: BaseDepartment._id}); 
+	invokeAns.on("success", function(Table){		
+		var command = CFabric.commandFabric("Ads", "Read", { Table: Table._id}); 
 		var invokeAns = Invoker.invoke(command);
 		invokeAns.on("error", function(err){
 			console.log("Error:\n");
 			console.log(err);
 		});
-		invokeAns.on("success", function(Departments){
-			res.render("departments.jade", 
+		invokeAns.on("success", function(Ads){
+			res.render("tables.jade", 
 					{
 						title: "Ads Table",
 						text: "Current department: ",
-						BaseDepartment: BaseDepartment,
-						SubDepartments: Departments
+						Table: Table,
+						Ads: Ads
 					});
 		});
 	});

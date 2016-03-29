@@ -7,7 +7,7 @@ function RandomInt(size)
 
 function addDepartment(_type, _name, _baseDepartment)
 {
-	var _tableId = db.Tables.insertOne(	{ Ads: [] }).insertedId.str;
+	var _tableId = db.Tables.insertOne(	{ Name: "Чья-то доска объявлений." }).insertedId.str;
 	return db.Departments.insertOne(
 		{	
 			Type: _type,
