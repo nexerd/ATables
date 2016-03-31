@@ -6,7 +6,8 @@ block content
 	- if (Ads)
 		- each Ad in Ads
 			div
-				p= "Тема: " + Ad.Name
+				p
+					a(href="http://127.0.0.1:8000/Ads/" + Ad._id)= "Тема: " + Ad.Name
 				p= "Объявление: " + Ad.Text
 				p= "Метка: " + Ad.Tag
 				p= "Дата: " + Ad.Date

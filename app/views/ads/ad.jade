@@ -2,6 +2,13 @@ extends ../layout
 block content
 	h1 #{Ad.Name}
 	p Текст:
-		#{Ad.Text}
-	P Метка:
-		#{Ad.Tag}
+	p #{Ad.Text}
+	P Метка: #{Ad.Tag}
+	p Комментарии:
+	p
+		- each Comment in Ad.Comments
+			p= Comment
+	form(method="post")
+		input(type="text" name="commentText")
+		input(type="submit" value="Добавить")
+		input(type="hidden" value="put" name="_method")

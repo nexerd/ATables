@@ -19,7 +19,7 @@ exports.show = function(req, res, next)
 			console.log(err);
 		});
 		invokeAns.on("success", function(Departments){
-			res.render("departments/departments.jade", 
+			res.render("departments/department.jade", 
 					{
 						title: "Ads Table",
 						text: "Current department: ",
@@ -32,3 +32,4 @@ exports.show = function(req, res, next)
 
 exports.new = function(req, res, next) {}
 exports.create = function(req, res, next) {}
+exports.update = function(req, res, next) {}
