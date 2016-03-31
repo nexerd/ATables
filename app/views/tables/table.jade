@@ -1,13 +1,13 @@
 extends ../layout
 block content
 	h1 Доска объявлений: #{Table.Name}
-	form(action="http://127.0.0.1:8000/Ads/create/" + Table._id method="get")
+	form(action="/Ads/create/" + Table._id method="get")
 		input(type="submit" value="Добавить объявление")
 	- if (Ads)
 		- each Ad in Ads
 			div
 				p
-					a(href="http://127.0.0.1:8000/Ads/" + Ad._id)= "Тема: " + Ad.Name
+					a(href="/Ads/" + Ad._id)= "Тема: " + Ad.Name
 				p= "Объявление: " + Ad.Text
 				p= "Метка: " + Ad.Tag
 				p= "Дата: " + Ad.Date

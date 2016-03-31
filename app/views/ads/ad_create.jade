@@ -1,6 +1,6 @@
 extends ../layout
 block content
-	form(action="http://127.0.0.1:8000/Ads/new/" + _tableId method="post") 	
+	form(action="/Ads/new/" + _tableId method="post") 	
 		p Заголовок:
 		p
 			input(type="text" name="Name")
