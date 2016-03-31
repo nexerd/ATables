@@ -1,6 +1,8 @@
-extends layout
+extends ../layout
 block content
 	h1 Доска объявлений: #{Table.Name}
+	form(action="http://127.0.0.1:8000/Ads/create/" + Table._id method="get")
+		input(type="submit" value="Добавить объявление")
 	- if (Ads)
 		- each Ad in Ads
 			div

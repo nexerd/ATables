@@ -1,0 +1,14 @@
+extends ../layout
+block content
+	form(action="http://127.0.0.1:8000/Ads/new/" + _tableId method="post") 	
+		p Заголовок:
+		p
+			input(type="text" name="Name")
+		p Текст:
+		p
+			input(type="text" name="Text")
+		p Метка:
+		p
+			input(type="text" name="Tag")
+		p
+			input(type="submit" value="Отправить")

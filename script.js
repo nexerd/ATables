@@ -102,7 +102,7 @@ function createAds(count)
 			Name: _Anames[RandomInt(5)],
 			Text: "Бла-бла бла бал. Оолололололололололлоло. Какая-то ерунда. Балалала. срочно. брыстро. мигом. ВСе отчислены!",
 			Tag: _Atags[RandomInt(5)],
-			Date: new Date(2016, RandomInt(3) + 1, RandomInt(20))
+			Date: new Date(2015, RandomInt(3) + 1, RandomInt(20))
 		}).insertedId.str;
 	}
 }

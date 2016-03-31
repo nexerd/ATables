@@ -17,7 +17,7 @@ exports.show = function(req, res, next)
 			console.log(err);
 		});
 		invokeAns.on("success", function(Ads){
-			res.render("tables.jade", 
+			res.render("tables/tables.jade", 
 					{
 						title: "Ads Table",
 						text: "Current department: ",
@@ -27,3 +27,6 @@ exports.show = function(req, res, next)
 		});
 	});
 }
+
+exports.new = function(req, res, next) {}
+exports.create = function(req, res, next) {}

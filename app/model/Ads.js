@@ -34,6 +34,7 @@ exports.createInvoker = function ()
 					if (err)
 					{
 						eventEmitter.emit("error", err);
+						db.close();
 					}
 					else
 					{
@@ -44,6 +45,40 @@ exports.createInvoker = function ()
 							 	db.close();
 							 });	
 					}
+				});
+			}
+			
+		});
+		return eventEmitter;
+	};
+
+	this.Write = function(Ad) 
+	{
+		var events = require("events");
+		var eventEmitter = new events.EventEmitter();		
+		var ObjectID = require("mongodb").ObjectID;
+		Ad.Table = ObjectID(Ad.Table);
+		this.MongoClient.connect(this.url, function(err, db){
+			if (err)
+			{
+				eventEmitter.emit("error", err);
+				db.close();
+			}
+			else
+			{
+				var collection = db.collection("Ads");	
+				//console.log(Ad);
+				collection.insertOne(Ad, function(err, ans){
+					if (err)
+					{
+						eventEmitter.emit("error", err);
+					}
+					else
+					{
+						//console.log(ans.result);
+						eventEmitter.emit("success", ans.ops);	
+					}
+					db.close();
 				});
 			}
 			
