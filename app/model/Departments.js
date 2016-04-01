@@ -14,7 +14,7 @@ exports.createInvoker = function ()
 			}
 			else
 			{
-				var collection = db.collection("Departments");	
+				var collection = db.collection("departments");	
 				if (params.Name && params.Type)
 				{				
 					var request = { Type: params.Type,	Name: params.Name };

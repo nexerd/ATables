@@ -14,7 +14,7 @@ exports.createInvoker = function ()
 			}
 			else
 			{
-				var collection = db.collection("Ads");	
+				var collection = db.collection("ads");	
 				if (params.Id)
 				{
 					var ObjectID = require("mongodb").ObjectID;

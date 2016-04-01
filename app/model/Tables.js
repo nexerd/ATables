@@ -14,7 +14,7 @@ exports.createInvoker = function ()
 			}
 			else
 			{
-				var collection = db.collection("Tables");	
+				var collection = db.collection("tables");	
 				if (params.Id)
 				{
 					var ObjectID = require("mongodb").ObjectID;
@@ -23,8 +23,8 @@ exports.createInvoker = function ()
 				else
 					throw "Empty request!";
 
-				//console.log("\nTables collection find:");
-				//console.log(request);
+				console.log("\nTables collection find:");
+				console.log(request);
 				collection.findOne(request, function(err, doc){
 					if (err)
 					{

@@ -7,8 +7,8 @@ function RandomInt(size)
 
 function addDepartment(_type, _name, _baseDepartment)
 {
-	var _tableId = db.Tables.insertOne(	{ Name: "Чья-то доска объявлений." }).insertedId.str;
-	return db.Departments.insertOne(
+	var _tableId = db.tables.insertOne(	{ Name: "Чья-то доска объявлений." }).insertedId.str;
+	return db.departments.insertOne(
 		{	
 			Type: _type,
 			Name: _name,
@@ -17,10 +17,16 @@ function addDepartment(_type, _name, _baseDepartment)
 		}).insertedId.str;
 }
 
-function createFaculty(_name, _gfrom, _gto)
+function createUniversity()
 {
-	var _facultyId = addDepartment("Факультет", _name, _course, []);
-	var _course =[];
+	var _universityId = addDepartment("Университет", "ИГЭУ им. В.И. Ленина"); 
+	createFaculty("ИВТФ", 41, 47, _universityId);
+	createFaculty("ЭМФ", 31, 39, _universityId);
+}
+
+function createFaculty(_name, _gfrom, _gto, _universityId)
+{
+	var _facultyId = addDepartment("Факультет", _name, _universityId);	
 	for (var i=1; i<5; i++)
 	{
 		createCourse(i, _facultyId, _gfrom, _gto);
@@ -62,7 +68,7 @@ function createStudent(_groupId)
 
 	if (_sex)
 	{
-		return db.Users.insertOne(
+		return db.users.insertOne(
 		{	
 			Department: _groupId,
 			Sex: "Мужской",
@@ -73,7 +79,7 @@ function createStudent(_groupId)
 	}
 	else
 	{
-		return db.Users.insertOne(
+		return db.users.insertOne(
 		{	
 			Department: _groupId,
 			Sex: "Женский",
@@ -86,8 +92,8 @@ function createStudent(_groupId)
 
 function createAds(count)
 {
-	var cursorTables = db.Tables.find();
-	var sizeCursor =  db.Tables.find().count();
+	var cursorTables = db.tables.find();
+	var sizeCursor =  cursorTables.count();
 
 	var _Anames = ["Срочно!", "Конференция!", "Деканат! Долги!", "Общее собрание", "Разыскивается"];
 	var _Atags = ["Учеба", "Спорт", "Мероприятия", "Работа", "Важное"];
@@ -96,7 +102,7 @@ function createAds(count)
 	for (var i=0; i<count; i++)
 	{
 		_idTable = cursorTables[RandomInt(sizeCursor)]._id;
-		_AdId = db.Ads.insertOne(	
+		_AdId = db.ads.insertOne(	
 		{ 
 			Table: _idTable,
 			Name: _Anames[RandomInt(5)],
@@ -110,8 +116,7 @@ function createAds(count)
 
 function _Main()
 {
-	createFaculty("ИВТФ", 41, 47);
-	createFaculty("ЭМФ", 31, 39);
+	createUniversity();
 	createAds(1000);
 }
 
