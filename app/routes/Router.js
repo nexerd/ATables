@@ -18,8 +18,10 @@ function AdsRoute(app)
 
 	app.get("/Ads/:Id/" , controller.show);
 
+	// Id = TableId
 	app.get("/Ads/create/:Id/" , controller.create);
 
+	// Id = TableId
 	app.post("/Ads/new/:Id/" , controller.new);
 
 	app.put("/Ads/:Id/" , controller.update);	
