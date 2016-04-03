@@ -14,7 +14,7 @@ var Router = require("./routes/Router");
 var CommandInvoker = require("./model/CommandInvoker");
 var types = ["Departments", "Ads", "Tables"];
 
-
+//var DbScript = require("./model/DbScript");
 
 app.set("port", process.env.PORT || 8000)
 app.set("views", __dirname + "/views");

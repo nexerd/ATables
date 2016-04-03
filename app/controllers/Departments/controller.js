@@ -1,32 +1,37 @@
 var CFabric = require("../commandFabric");
 var Invoker = require("../../model/CommandInvoker")
 
+
+var DepartmentModel = require("../../model/DepartmentsModel").DepartmentModel;	
+
+
 exports.show = function(req, res, next)
 {
-	var command = CFabric.commandFabric("Departments", "Read", { Id: req.params.Id } );
-	var invokeAns = Invoker.invoke(command);	
-	invokeAns.on("error", function(err){
-		console.log("Error:\n");
-		console.log(err);
-	});
-	invokeAns.on("success", function(Departments){
-		//console.log(ans);
-		var BaseDepartment = Departments[0];
-		var command = CFabric.commandFabric("Departments", "Read", { BaseDepartment: BaseDepartment._id}); 
-		var invokeAns = Invoker.invoke(command);
-		invokeAns.on("error", function(err){
-			console.log("Error:\n");
+	var mongoose = require("../../model/mongooseConnect").connect();	
+	console.log("qq");
+	DepartmentModel.findById(req.params.Id, function(err, Department){
+		if (err)
+		{
 			console.log(err);
-		});
-		invokeAns.on("success", function(Departments){
+			throw err;
+		}
+		console.log(Department);
+		DepartmentModel.find({BaseDepartment: Department._id}, function(err, SubDepartments){
+			if (err)
+			{
+				console.log(err);
+				throw err;
+			}
+			console.log(SubDepartments);
 			res.render("departments/department.jade", 
 					{
-						title: "Ads Table",
-						text: "Current department: ",
-						BaseDepartment: BaseDepartment,
-						SubDepartments: Departments
+						"title": "Ads Table",
+						"text": "Current department: ",
+						"BaseDepartment": Department,
+						"SubDepartments": SubDepartments
 					});
 		});
+
 	});
 }
 

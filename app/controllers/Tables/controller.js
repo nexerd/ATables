@@ -1,11 +1,10 @@
-var CFabric = require("../commandFabric");
-var Invoker = require("../../model/CommandInvoker")
+	
+var TableModel = require("../../model/TablesModel").TableModel;	
+var AdModel = require("../../model/AdsModel").AdModel;	
 
 exports.show = function(req, res, next)
-{
-	var DbConnect = require("../../model/DbConnector");	
-	DbConnect.Connect();
-	var TableModel = require("../../model/TablesModel").TableModel;	
+{		
+	var mongoose = require("../../model/mongooseConnect").connect();
 	TableModel.findOne({_id: req.params.Id}, function(err, Table){
 		if (err)
 		{
@@ -13,8 +12,8 @@ exports.show = function(req, res, next)
 			console.log(err);
 		}
 		else
-		{
-			var AdModel = require("../../model/AdsModel").AdModel;		
+		{	
+			console.log(Table);
 			AdModel.find({Table: Table._id },function(err, Ads){
 				if (err)
 				{
@@ -23,6 +22,7 @@ exports.show = function(req, res, next)
 				}
 				else
 				{
+					console.log(Ads);
 					res.render("tables/table.jade", 
 					{
 						title: "Ads Table",
