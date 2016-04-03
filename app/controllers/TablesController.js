@@ -1,10 +1,9 @@
-	
-var TableModel = require("../../model/TablesModel").TableModel;	
-var AdModel = require("../../model/AdsModel").AdModel;	
-
+var TableModel = require("../model/TablesModel").TableModel;	
+var AdModel = require("../model/AdsModel").AdModel;	
+var mongoose = require("../model/mongooseConnect")
 exports.show = function(req, res, next)
 {		
-	var mongoose = require("../../model/mongooseConnect").connect();
+	mongoose.connect();
 	TableModel.findOne({_id: req.params.Id}, function(err, Table){
 		if (err)
 		{
@@ -13,7 +12,6 @@ exports.show = function(req, res, next)
 		}
 		else
 		{	
-			console.log(Table);
 			AdModel.find({Table: Table._id },function(err, Ads){
 				if (err)
 				{
@@ -22,7 +20,6 @@ exports.show = function(req, res, next)
 				}
 				else
 				{
-					console.log(Ads);
 					res.render("tables/table.jade", 
 					{
 						title: "Ads Table",

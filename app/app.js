@@ -11,9 +11,8 @@ var fs = require("fs");
 
 var app = express();
 var Router = require("./routes/Router");
-var CommandInvoker = require("./model/CommandInvoker");
-var types = ["Departments", "Ads", "Tables"];
 
+// Генерация бд
 //var DbScript = require("./model/DbScript");
 
 app.set("port", process.env.PORT || 8000)
@@ -33,24 +32,29 @@ app.use(methodOverride(function(req, res){
 	}
 }));
 
-types.forEach(CommandInvoker.addInvoker);
-types.forEach(function(prefix) { Router.mapRoute(app, prefix) });
+Router.mapRoute(app);
 
 app.get("/", function(req, res) {
-	var CFabric = require("./controllers/commandFabric");
-	var Invoker = require("./model/CommandInvoker");
-	var command = CFabric.commandFabric("Departments", "Read", { Type: "Факультет"});
-	var invokeAns = Invoker.invoke(command);		
-	invokeAns.on("success", function(ans){		
-		res.render("index.jade", 
-			{
-				title: "Ads Table",
-				text: "Hello World!",
-				Faculties: ans
-			});
-	});
-	
-	});
+	var DepartmentModel = require("./model/DepartmentsModel").DepartmentModel;	
+	var mongoose = require("./model/mongooseConnect")
+	mongoose.connect();	
+
+	DepartmentModel.findOne({Type: "Университет"}, function(err, Department)
+	{
+		if (err)
+			throw err;
+		DepartmentModel.find({BaseDepartment: Department._id}, function(err, SubDepartments){
+			if (err)
+				throw err;
+			res.render("index.jade", 
+				{
+					title: "Ads Table",
+					text: Department.Name,
+					Faculties: SubDepartments
+				});
+		});
+	});	
+});
 
 
 app.use(function(req, res, next){
