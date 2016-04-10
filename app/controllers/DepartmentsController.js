@@ -1,9 +1,7 @@
 var DepartmentModel = require("../model/DepartmentsModel").DepartmentModel;	
-var mongoose = require("../model/mongooseConnect")
 
 exports.show = function(req, res, next)
-{
-	mongoose.connect();	
+{	
 	DepartmentModel.findById(req.params.Id, function(err, Department){
 		if (err)
 		{

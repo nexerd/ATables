@@ -1,6 +1,6 @@
 //use ATableTest0
 
-var mongoose = require("./mongooseConnect").connect();	
+//var mongoose = require("./mongooseConnect").connect();	
 var DepartmentModel = require("./DepartmentsModel").DepartmentModel;	
 var TableModel = require("./TablesModel").TableModel;	
 var AdModel = require("./AdsModel").AdModel;	
@@ -85,7 +85,7 @@ mongoose.connection.once("open",  function()
 		if (err) throw err;
 		createUniversity();
 		console.log("Waiting to create db!")
-		setTimeout(function() {mongoose.disconnect(); console.log("Db created!")}, 20000 );
+		setTimeout(function() {/*mongoose.disconnect();*/ console.log("Db created!")}, 20000 );
 	});
 	
 });

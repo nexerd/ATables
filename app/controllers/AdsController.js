@@ -1,9 +1,7 @@
 var AdModel = require("../model/AdsModel").AdModel;	
-var mongoose = require("../model/mongooseConnect")
 
 exports.show = function(req, res, next)
-{	
-	var db = mongoose.connection;
+{		
 	AdModel.findById( { _id: req.params.Id }, function(err, Ad){
 		if (err)
 			throw err;
@@ -13,7 +11,6 @@ exports.show = function(req, res, next)
 
 exports.new = function(req, res, next)
 {
-	var db = mongoose.connection;
 	var Ad = new AdModel({
 	Table: req.params.Id,
 	Name: req.body.Name,
@@ -39,8 +36,7 @@ exports.create = function(req, res, next)
 }
 
 exports.update = function(req, res, next)
-{
-	var db = mongoose.connection;
+{	
 	AdModel.update({ _id: req.params.Id }, {$push: { Comments: req.body.commentText} },
 		function(err)
 		{

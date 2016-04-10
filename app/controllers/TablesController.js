@@ -1,9 +1,8 @@
 var TableModel = require("../model/TablesModel").TableModel;	
 var AdModel = require("../model/AdsModel").AdModel;	
-var mongoose = require("../model/mongooseConnect")
+
 exports.show = function(req, res, next)
-{		
-	mongoose.connect();
+{	
 	TableModel.findOne({_id: req.params.Id}, function(err, Table){
 		if (err)
 		{

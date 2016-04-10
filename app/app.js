@@ -8,7 +8,7 @@ var methodOverride = require("method-override");
 var cookieSession = require("cookie-session");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
-
+var mongoose = require("./model/mongooseConnect")	
 var config = require("./config");
 
 var fs = require("fs");
@@ -61,9 +61,6 @@ Router.mapRoute(app);
 
 app.get("/", function(req, res) {
 	var DepartmentModel = require("./model/DepartmentsModel").DepartmentModel;	
-	var mongoose = require("./model/mongooseConnect")
-	mongoose.connect();	
-
 	DepartmentModel.findOne({Type: "Университет"}, function(err, Department)
 	{
 		if (err)
