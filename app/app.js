@@ -5,6 +5,12 @@ var favicon = require("serve-favicon");
 var static = require("serve-static");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
+var cookieSession = require("cookie-session");
+var cookieParser = require("cookie-parser");
+var session = require("express-session");
+
+var config = require("./config");
+
 var fs = require("fs");
 
 //var LogStream = fs.createWriteStream(__dirname + "/logger.log", {flags: 'w'});
@@ -31,6 +37,25 @@ app.use(methodOverride(function(req, res){
 		return method;
 	}
 }));
+
+app.use(cookieParser());
+
+var MongoStore = require("connect-mongo")(session);
+
+app.use(cookieSession({
+	secret : config.get("session:secret"),
+	key: config.get("session:key"),
+	cookie: config.get("session:cookie"),
+	store: new MongoStore({url : config.get("mongoose:uri")})
+}));
+
+/*
+app.use(function(req, res, next){
+	req.session.numberOfVisits = req.session.numberOfVisits + 1 || 1;
+	console.log(req.session.numberOfVisits);
+	next();
+})
+*/
 
 Router.mapRoute(app);
 

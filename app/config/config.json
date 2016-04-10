@@ -1,0 +1,23 @@
+{
+	"port" : 8000,
+	"mongoose" : {
+		"uri" : "mongodb://localhost:27017/ATableTest0",
+		"options" : {
+			"server" :{
+				"socketOptions": {
+					"keepAlive" : 1
+				}
+			}
+		}
+	},
+	"session" :
+	{
+		"secret" : "KillerIsJim",
+		"key" : "sid",
+		"cookie" : {
+			"path" : "/",
+			"httpOnly" : true,
+			"maxAge" : null
+		}
+	}
+}
