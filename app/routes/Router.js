@@ -3,6 +3,7 @@ exports.mapRoute = function(app)
 	TablesRoute(app);
 	AdsRoute(app);
 	DepartmentsRoute(app);
+	UsersRoute(app);
 }
 
 function TablesRoute(app)
@@ -32,5 +33,20 @@ function DepartmentsRoute(app)
 	var controller = require("../controllers/DepartmentsController");
 
 	app.get("/Departments/:Id/" , controller.show);
+}
+
+function UsersRoute(app)
+{
+	var controller = require("../controllers/UsersController");		
+
+	app.get("/Users/create/" , controller.create);
+
+	app.get("/Users/login/" , controller.login);
+
+	app.post("/Users/enter/" , controller.enter);
+
+	app.post("/Users/new/" , controller.new);	
+
+	app.get("/Users/:Id" , controller.show);
 }
 

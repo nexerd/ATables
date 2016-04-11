@@ -20,15 +20,17 @@ var UserSchema = mongoose.Schema({
 	}
 });
 
-UserSchema.methods.encryptPassword = function(password){
-	return crypto.createHmac("shal", this.Salt).update(password).digest("hex");
+UserSchema.methods.encryptPassword = function(password){	
+	var hmac = crypto.createHmac("sha1", this.Salt);
+	hmac.update(password.toString());	
+	return hmac.digest("hex");
 };
 
 UserSchema.virtual("password")
-	.set(function(password) {
+	.set(function(password) {		
 		this._plainPassword = password;
 		this.Salt = crypto.randomBytes(32).toString("base64");
-		this.HashedPassword = this.encryptPassword(password);
+		this.HashedPassword = this.encryptPassword(password);	
 	})
 	.get(function() { return this._plainPassword; });
 

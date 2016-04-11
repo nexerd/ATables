@@ -1,0 +1,11 @@
+extends ../layout
+block content
+	form(action="/Users/enter/" method="post") 	
+		p Имя:
+		p
+			input(type="text" name="Name")
+		p Пароль:
+		p
+			input(type="password" name="Password")
+		p
+			input(type="submit" value="Акей")
