@@ -1,6 +1,6 @@
 extends ../layout
 block content
-	h1 Доска объявлений: #{Table.Name}
+	h1 Доска объявлений: #{Table.Name}	
 	form(action="/Ads/create/" + Table._id method="get")
 		input(type="submit" value="Добавить объявление")
 	- if (Ads)

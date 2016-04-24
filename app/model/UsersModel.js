@@ -35,6 +35,7 @@ UserSchema.virtual("password")
 	.get(function() { return this._plainPassword; });
 
 UserSchema.methods.checkPassword = function(password){
+	console.log("lets check " + password + " ?? " + this.password);
 	return this.encryptPassword(password) === this.HashedPassword;
 };
 

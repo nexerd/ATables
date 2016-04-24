@@ -11,12 +11,13 @@ var session = require("express-session");
 var mongoose = require("./model/mongooseConnect")	
 var config = require("./config");
 
+//var passport = require("./security/security");
+
 var fs = require("fs");
 
 //var LogStream = fs.createWriteStream(__dirname + "/logger.log", {flags: 'w'});
 
 var app = express();
-var Router = require("./routes/Router");
 
 // Генерация бд
 //var DbScript = require("./model/DbScript");
@@ -29,6 +30,10 @@ app.use(favicon(__dirname + "/public/favicon.ico"));
 app.use(logger("dev"));//, {stream: LogStream}));
 app.use(static(__dirname + "/public"));
 app.use(bodyParser());
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+
 app.use(methodOverride(function(req, res){
 	if (req.body && typeof req.body == "object" && "_method" in req.body)
 	{
@@ -39,25 +44,20 @@ app.use(methodOverride(function(req, res){
 }));
 
 app.use(cookieParser());
+app.use(session({secret: 'mySecretKey'}));
 
-var MongoStore = require("connect-mongo")(session);
+var passport = require('passport');
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use(cookieSession({
-	secret : config.get("session:secret"),
-	key: config.get("session:key"),
-	cookie: config.get("session:cookie"),
-	store: new MongoStore({url : config.get("mongoose:uri")})
-}));
+var flash = require('connect-flash');
+app.use(flash());
 
-/*
-app.use(function(req, res, next){
-	req.session.numberOfVisits = req.session.numberOfVisits + 1 || 1;
-	console.log(req.session.numberOfVisits);
-	next();
-})
-*/
+var initPassport = require('./passport/init');
+initPassport(passport);
 
-Router.mapRoute(app);
+var routes = require("./routes/route")(passport);
+app.use('/', routes);
 
 app.get("/", function(req, res) {
 	var DepartmentModel = require("./model/DepartmentsModel").DepartmentModel;	
