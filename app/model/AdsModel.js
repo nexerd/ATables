@@ -5,7 +5,8 @@ var AdSchema = mongoose.Schema({
 	"Text": "String",
 	"Tag": "String",
 	"Date": "Date",
-	"Comments": []
+	"Comments": [],
+	"UserId" : "ObjectId"
 });
 
 var AdModel = mongoose.model("Ads", AdSchema);

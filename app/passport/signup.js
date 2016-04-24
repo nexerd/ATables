@@ -8,7 +8,7 @@ module.exports = function(passport){
         },
         function(req, username, password, done) {
 
-            findOrCreateUser = function(){
+            //findOrCreateUser = function(){
                 // find a user in Mongo with provided username
                 UserModel.findOne({ 'UserName' :  username }, function(err, user) {
                     // In case of any error, return using the done method
@@ -29,21 +29,21 @@ module.exports = function(passport){
                         newUser.save(function(err){
                             if (err)
                             {
-                                console.log('Error in Saving user: '+err);  
+                                console.log('Error in Saving user: '+err);                                  
                                 throw err;  
                             }       
                             else
                             {
-                                console.log("Регистрация завершена!");
-                                res.redirect("/Users/login/");
+                                console.log("Регистрация завершена!");   
+                                return done(null, newUser);                               
                             }
                         });
                     }
                 });
-            };
+            //};
             // Delay the execution of findOrCreateUser and execute the method
             // in the next tick of the event loop
-            process.nextTick(findOrCreateUser);
+            //process.nextTick(findOrCreateUser);
         })
     );
 }

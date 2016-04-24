@@ -25,12 +25,12 @@ function AdsRoute(router)
 	router.get("/Ads/:Id/" , controller.show);
 
 	// Id = TableId
-	router.get("/Ads/create/:Id/" , controller.create);
+	router.get("/Ads/create/:Id/" , isAuthenticated, controller.create);
 
 	// Id = TableId
-	router.post("/Ads/new/:Id/" , controller.new);
+	router.post("/Ads/new/:Id/" , isAuthenticated, controller.new);
 
-	router.put("/Ads/:Id/" , controller.update);	
+	router.put("/Ads/:Id/" , isAuthenticated, controller.update);	
 }
 
 function DepartmentsRoute(router)
@@ -55,6 +55,11 @@ function UsersRoute(router, passport)
 		    failureRedirect: '/Users/create/',
 		    failureFlash : true 
 	  }));	
+
+	router.get("/Users/logout" , function(req, res, next){
+		req.logout();
+  		res.redirect('/');
+	});
 
 	router.get("/Users/:Id" , controller.show);
 

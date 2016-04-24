@@ -72,7 +72,8 @@ app.get("/", function(req, res) {
 				{
 					title: "Ads Table",
 					text: Department.Name,
-					Faculties: SubDepartments
+					Faculties: SubDepartments,
+					user: req.isAuthenticated()
 				});
 		});
 	});	

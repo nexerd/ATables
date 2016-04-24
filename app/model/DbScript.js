@@ -1,6 +1,9 @@
 //use ATableTest0
 
-//var mongoose = require("./mongooseConnect").connect();	
+var mongoose = require("mongoose");
+var url = 'mongodb://localhost:27017/ATableTest0';	
+mongoose.connect(url);
+
 var DepartmentModel = require("./DepartmentsModel").DepartmentModel;	
 var TableModel = require("./TablesModel").TableModel;	
 var AdModel = require("./AdsModel").AdModel;	
@@ -14,13 +17,16 @@ function addDepartment(_type, _name, _baseDepartment)
 {
 	var table = new TableModel({Name: "Чья-то доска объявлений"});
 	table.save();
+	/*
 	createAds(RandomInt(10) + 10, table._id);
+	*/
 	var department = new DepartmentModel({
 		Type: _type,
 		Name: _name.toString(),
 		BaseDepartment: _baseDepartment,
 		TableId:  table._id
 	});
+	
 	department.save();
 	return department._id;
 }

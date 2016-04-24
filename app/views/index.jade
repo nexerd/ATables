@@ -5,6 +5,9 @@ block content
 		p
 			a(href="Departments/"+item._id)= item.Name
 	p
-		a(href="Users/create/") Регистрация
-	p
-		a(href="Users/login/") Вход
+		a(href="Users/create/") Регистрация		
+	p 
+		- if (!user)
+			a(href="Users/login/") Вход
+		- if (user)			
+			a(href="Users/logout/") Выход
