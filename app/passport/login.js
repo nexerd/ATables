@@ -7,9 +7,6 @@ module.exports = function(passport){
             passReqToCallback : true
         },
         function(req, username, password, done) { 
-            // check in mongo if a user with username exists or not
-            console.log('user: ' + username);
-            console.log('password: ' + password);
             UserModel.findOne({ 'UserName' :  username }, 
                 function(err, user) {
                     if (err) { return done(err); }

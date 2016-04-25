@@ -1,4 +1,4 @@
-var AdModel = require("../model/AdsModel").AdModel;	
+var AdModel = require("../model/AdsModel").AdModel;		
 
 exports.show = function(req, res, next)
 {		
@@ -16,7 +16,11 @@ exports.new = function(req, res, next)
 	Name: req.body.Name,
 	Text:req.body.Text,
 	Tag: req.body.Tag,
-	Date: new Date()
+	Date: new Date(),
+	User: {
+		Id: req.user._id,
+		Name: req.user.UserName
+	}
 	});
 	Ad.save(function(err){
 		if (err)
@@ -37,7 +41,19 @@ exports.create = function(req, res, next)
 
 exports.update = function(req, res, next)
 {	
-	AdModel.update({ _id: req.params.Id }, {$push: { Comments: req.body.commentText} },
+	AdModel.update({ _id: req.params.Id },
+	 { $push: 
+	 	{ 
+	 		Comments: {
+	 			Text: req.body.commentText,
+	 			Data: new Date(),
+	 			User: {
+	 				Id: req.user._id,
+	 				Name: req.user.UserName
+	 			}
+	 		}
+	 	} 
+	 },
 		function(err)
 		{
 			if (err)

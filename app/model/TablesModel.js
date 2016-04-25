@@ -1,6 +1,9 @@
 var mongoose = require("mongoose");
 var TableSchema = mongoose.Schema({
-	"Name": "String"
+	"Name": {
+		type : String,
+		//required: true
+	}
 });
 
 var TableModel = mongoose.model("Tables", TableSchema);

@@ -17,6 +17,22 @@ var UserSchema = mongoose.Schema({
 	Created: {
 		type: Date,
 		default: Date.now
+	},
+	FirtstName: {
+		type : String,
+		//required: true
+	},
+	SecondName: {
+		type : String,
+		//required: true
+	},
+	ThirdName: {
+		type : String,
+		//required: true
+	},
+	Department: {
+		type : mongoose.Schema.Types.ObjectId,
+		//required: true
 	}
 });
 

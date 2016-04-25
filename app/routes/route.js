@@ -44,31 +44,29 @@ function UsersRoute(router, passport)
 {
 	var controller = require("../controllers/UsersController");		
 
-	router.get("/Users/create/" , controller.create);
+	router.get("/Users/signup/" , controller.create);
 
 	router.get("/Users/login/" , controller.login);
 
-	//router.post("/Users/enter/" , controller.enter);
-
-	router.post("/Users/new/" , passport.authenticate('signup', {		
+	router.post("/Users/signup/" , passport.authenticate('signup', {		
 		    successRedirect: '/',
 		    failureRedirect: '/Users/create/',
 		    failureFlash : true 
 	  }));	
 
-	router.get("/Users/logout" , function(req, res, next){
+	router.get("/Users/logout/" , function(req, res, next){
 		req.logout();
   		res.redirect('/');
-	});
+	});	
 
-	router.get("/Users/:Id" , controller.show);
-
-	router.post("/Users/enter/",  passport.authenticate('login', {		
+	router.post("/Users/login/",  passport.authenticate('login', {		
 		    successRedirect: '/',
 		    failureRedirect: '/Users/login/',
 		    failureFlash : true 
 	  })
 	);
+
+	router.get("/Users/:Id" , controller.show);
 }
 
 function isAuthenticated(req, res, next) {
