@@ -11,8 +11,6 @@ var session = require("express-session");
 var mongoose = require("./model/mongooseConnect")	
 var config = require("./config");
 
-//var passport = require("./security/security");
-
 var fs = require("fs");
 
 //var LogStream = fs.createWriteStream(__dirname + "/logger.log", {flags: 'w'});
@@ -22,7 +20,6 @@ var app = express();
 // Генерация бд
 //var DbScript = require("./model/DbScript");
 
-app.set("port", process.env.PORT || 8000)
 app.set("views", __dirname + "/views");
 app.set("view exgine", "jade");
 

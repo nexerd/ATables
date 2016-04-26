@@ -4,11 +4,11 @@ mongoose.connect(url);
 var db = mongoose.connection;
 mongoose.connection.on("close",  function()
 {	
-	console.log("Connection close...");
+	console.log("Connection  " + url + "  close...");
 });
 mongoose.connection.on("open",  function()
 {	
-	console.log("Connection open...");
+	console.log("Connection " + url + " open...");
 });
 mongoose.connection.on("error",  function(err)
 {	
