@@ -1,5 +1,10 @@
 var mongoose = require("mongoose");
-var url = 'mongodb://localhost:27017/ATableTest0';	
+
+var url = process.env.OPENSHIFT_MONGODB_DB_URL ?
+	 process.env.OPENSHIFT_MONGODB_DB_URL + 'ATableTest0' :
+	 		'mongodb://localhost:27017/ATableTest0';	
+
+console.log(url);
 mongoose.connect(url);
 var db = mongoose.connection;
 mongoose.connection.on("close",  function()

@@ -18,7 +18,7 @@ var fs = require("fs");
 var app = express();
 
 // Генерация бд
-//var DbScript = require("./model/DbScript");
+var DbScript = require("./model/DbScript");
 
 app.set("views", __dirname + "/views");
 app.set("view exgine", "jade");
