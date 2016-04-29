@@ -15,7 +15,7 @@ if (process.env.OPENSHIFT_MONGODB_DB_URL)
 	}
 else
 	mongoose.connect(url);
-var db = mongoose.connection;
+
 mongoose.connection.on("close",  function()
 {	
 	console.log("Connection  " + url + "  close...");
