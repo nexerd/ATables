@@ -10,7 +10,9 @@ var options = {
 
 console.log(url);
 if (process.env.OPENSHIFT_MONGODB_DB_URL)
-	mongoose.connect(url, options);
+	{		
+		mongoose.connect(url);//, options);
+	}
 else
 	mongoose.connect(url);
 var db = mongoose.connection;
