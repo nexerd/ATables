@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var url = process.env.OPENSHIFT_MONGODB_DB_URL ?
-	 process.env.OPENSHIFT_MONGODB_DB_URL + 'ATableTest0' :
+	 process.env.OPENSHIFT_MONGODB_DB_URL + 'test' :
 	 		'mongodb://localhost:27017/ATableTest0';	
 
 console.log(url);

@@ -46,7 +46,7 @@ var MongoDBStore = require('connect-mongodb-session')(session);
 var SessionStore = new MongoDBStore(
       { 
         uri: process.env.OPENSHIFT_MONGODB_DB_URL ?
-	 process.env.OPENSHIFT_MONGODB_DB_URL + 'ATableTest0' :
+	 process.env.OPENSHIFT_MONGODB_DB_URL + 'test' :
 	 		'mongodb://localhost:27017/ATableTest0' ,
         collection: 'mySessions'
       });
