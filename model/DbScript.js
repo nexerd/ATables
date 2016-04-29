@@ -1,7 +1,9 @@
 //use ATableTest0
 
 var mongoose = require("mongoose");
-var url = 'mongodb://localhost:27017/ATableTest0';	
+var url = process.env.OPENSHIFT_MONGODB_DB_URL ?
+	 process.env.OPENSHIFT_MONGODB_DB_URL + 'ATableTest0' :
+	 		'mongodb://localhost:27017/ATableTest0';
 mongoose.connect(url);
 
 var DepartmentModel = require("./DepartmentsModel").DepartmentModel;	
