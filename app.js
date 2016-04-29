@@ -42,19 +42,10 @@ app.use(methodOverride(function(req, res){
 }));
 
 app.use(cookieParser());
-var MongoDBStore = require('connect-mongodb-session')(session);
-var SessionStore = new MongoDBStore(
-      { 
-        uri: process.env.OPENSHIFT_MONGODB_DB_URL ?
-	 process.env.OPENSHIFT_MONGODB_DB_URL + 'test' :
-	 		'mongodb://localhost:27017/ATableTest0' ,
-        collection: 'mySessions'
-      });
-
 app.use(session({secret: 'mySecretKey', 
                  saveUninitialized: true,
                  resave: true,
-                 store: SessionStore
+                 store: require('mongoose-session')(mongoose)
              }));
 
 var passport = require('passport');
