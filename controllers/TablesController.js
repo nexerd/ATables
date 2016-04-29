@@ -24,7 +24,8 @@ exports.show = function(req, res, next)
 						title: "Ads Table",
 						text: "Current department: ",
 						Table: Table,
-						Ads: Ads						
+						Ads: Ads,
+						user: req.user						
 					});
 
 				}

@@ -18,17 +18,17 @@ var UserSchema = mongoose.Schema({
 		type: Date,
 		default: Date.now
 	},
-	FirtstName: {
+	FirstName: {
 		type : String,
-		//required: true
+		required: true
 	},
 	SecondName: {
 		type : String,
-		//required: true
+		required: true
 	},
 	ThirdName: {
 		type : String,
-		//required: true
+		required: true
 	},
 	Department: {
 		type : mongoose.Schema.Types.ObjectId,
@@ -50,8 +50,7 @@ UserSchema.virtual("password")
 	})
 	.get(function() { return this._plainPassword; });
 
-UserSchema.methods.checkPassword = function(password){
-	console.log("lets check " + password + " ?? " + this.password);
+UserSchema.methods.checkPassword = function(password){	
 	return this.encryptPassword(password) === this.HashedPassword;
 };
 

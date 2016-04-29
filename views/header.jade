@@ -1,0 +1,17 @@
+header
+	style
+		include ../public/stylesheet/header.css
+	- if (user)
+		#greeting= 'Добро пожаловать, ' + user.FirstName
+	.button#index
+		a(href='/') На главную
+	- if (user)
+		.button#profile
+			a(href='/Users/' + user._id) Личный кабинет
+		.button#logout
+			a(href='/Users/logout') Выход
+	- else
+		.button#signup
+			a(href='/Users/signup') Регистрация
+		.button#login
+			a(href='/Users/login') Вход

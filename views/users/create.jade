@@ -1,12 +1,21 @@
 extends ../layout
 block content
-	form(action="/Users/signup/" method="post") 	
-		p Имя:
+	form#signup(action="/Users/signup/" method="post") 	
+		p Логин:
 		p
-			input(type="text" name="username")
+			input(type="text" name="username")		
 		p Пароль:
 		p
-			input(type="password" name="password")
+			input(type="password" name="password")		
+		p Имя:
 		p
-			input(type="submit" value="Акей")
+			input(type="text" name="firstname")
+		p Фамилия:
+		p
+			input(type="text" name="secondname")
+		p Отчество:
+		p
+			input(type="text" name="thirdname")
+		p
+			input(type="submit" value="Отправить")
 		

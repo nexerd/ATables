@@ -1,13 +1,11 @@
 extends layout
-block content
-	h1 #{text}
-	- each item in Faculties
-		p
-			a(href="Departments/"+item._id)= item.Name
-	p
-		a(href="Users/signup/") Регистрация		
-	p 
-		- if (!user)
-			a(href="Users/login/") Вход
-		- if (user)			
-			a(href="Users/logout/") Выход
+block content	
+	style
+		include ../public/stylesheet/main.css
+	#main
+		include menu
+		#text
+			h1 #{text}
+			- each item in Faculties
+				p
+					a(href="Departments/"+item._id)= item.Name	

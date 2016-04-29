@@ -66,7 +66,7 @@ function UsersRoute(router, passport)
 	  })
 	);
 
-	router.get("/Users/:Id" , controller.show);
+	router.get("/User/:Id" , controller.show);
 }
 
 function isAuthenticated(req, res, next) {

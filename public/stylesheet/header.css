@@ -1,0 +1,9 @@
+header{
+	margin: 10px;
+    font-style: italic;
+}
+
+header div {
+    display: inline-block;
+    margin: 5px;
+}

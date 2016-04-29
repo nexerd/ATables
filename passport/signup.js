@@ -18,10 +18,13 @@ module.exports = function(passport){
                         console.log('User already exists with username: '+username);
                         return done(null, false, req.flash('message','User Already Exists'));
                     } else {
-
+                        console.log(req.body);
                         var newUser = new UserModel({
                             UserName: username,
-                            password: password
+                            password: password,
+                            FirstName: req.body.firstname,
+                            SecondName: req.body.secondname,
+                            ThirdName: req.body.thirdname
                         });
                         newUser.save(function(err){
                             if (err)
