@@ -1,11 +1,5 @@
 //use ATableTest0
 
-var mongoose = require("mongoose");
-var url = process.env.OPENSHIFT_MONGODB_DB_URL ?
-	 process.env.OPENSHIFT_MONGODB_DB_URL + 'ATableTest0' :
-	 		'mongodb://localhost:27017/ATableTest0';
-mongoose.connect(url);
-
 var DepartmentModel = require("./DepartmentsModel").DepartmentModel;	
 var TableModel = require("./TablesModel").TableModel;	
 var AdModel = require("./AdsModel").AdModel;	
@@ -86,18 +80,17 @@ function createAds(count, _idTable)
 	}
 }
 
-var db = mongoose.connection.db;
-mongoose.connection.once("open",  function()
-{
-	db.dropDatabase(function(err){
-		if (err) throw err;
-		createUniversity();
-		console.log("Waiting to create db!")
-		setTimeout(function() {/*mongoose.disconnect();*/ console.log("Db created!")}, 20000 );
+module.exports = function(mongoose){
+	mongoose.connection.once("open",  function(){
+		var db = mongoose.connection.db;
+		db.dropDatabase(function(err){
+			if (err) throw err;
+			createUniversity();
+			console.log("Waiting to create db!")
+			setTimeout(function() {console.log("Db created!")}, 20000 );
+		});
 	});
-	
-});
-mongoose.connection.on("error",  function(err)
-{	
-	console.log(err);
-});
+	mongoose.connection.on("error",  function(err){	
+		console.log(err);
+	});
+}

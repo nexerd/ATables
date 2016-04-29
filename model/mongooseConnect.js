@@ -20,4 +20,4 @@ mongoose.connection.on("error",  function(err)
 	console.log(err);
 });
 
-exports.mongoose = mongoose;
+module.exports = mongoose;
