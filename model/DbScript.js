@@ -82,8 +82,7 @@ function createAds(count, _idTable)
 
 module.exports = function(mongoose){
 	mongoose.connection.once("open",  function(){
-		var db = mongoose.connection.db;
-		if (err) throw err;
+		var db = mongoose.connection.db;		
 		createUniversity();
 		console.log("Waiting to create db!")
 		setTimeout(function() {console.log("Db created!")}, 20000 );
