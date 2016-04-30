@@ -45,7 +45,7 @@ app.use(cookieParser());
 app.use(session({secret: 'mySecretKey', 
                  saveUninitialized: false,
                  resave: false,
-                 store: require('mongoose-session')(mongoose)
+                 //store: require('mongoose-session')(mongoose)
              }));
 
 var passport = require('passport');
