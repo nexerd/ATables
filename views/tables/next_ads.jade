@@ -1,0 +1,10 @@
+- if (Ads)
+	- each Ad in Ads
+		.ad
+			.topic
+				a(href="/Ads/" + Ad._id)= Ad.Name
+			.text= Ad.Text
+			.buttom
+			.tag= 'Метка: ' + Ad.Tag
+			.date= Ad.Date
+			.user= 'Автор: ' + Ad.User.Name

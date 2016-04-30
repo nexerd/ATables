@@ -2,10 +2,10 @@ extends ../layout
 block content
 	form(action="/Ads/new/" + _tableId method="post") 	
 		p
-			input(type="text" name="Name" placeholder="Заголовок")
+			input(type="text" required name="Name" placeholder="Заголовок")
 		p
-			textarea(name="Text" placeholder="Текс объявления")
+			textarea(name="Text" required placeholder="Текс объявления")
 		p
-			input(type="text" name="Tag" placeholder="#Тэг")
+			input(type="text" required name="Tag" placeholder="#Тэг")
 		p
-			input(type="submit" value="Отправить")
+			input(type="submit" required value="Отправить")

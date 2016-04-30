@@ -6,7 +6,7 @@ div.ad {
     max-width: 1000px;	
 }
 
-div.ads{
+div#ads{
 	margin-left: 20px;
 }
 
@@ -51,4 +51,8 @@ div.user{
 
 div.date{
 	margin-left: 40px;
+}
+
+#next{
+	text-align: center;
 }

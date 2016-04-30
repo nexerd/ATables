@@ -16,6 +16,8 @@ function TablesRoute(router)
 	var controller = require("../controllers/TablesController");
 
 	router.get("/Tables/:Id/" , controller.show);
+
+	router.get("/Tables/:Id/:count/" , controller.next);
 }
 
 function AdsRoute(router)

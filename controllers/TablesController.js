@@ -11,7 +11,7 @@ exports.show = function(req, res, next)
 		}
 		else
 		{	
-			AdModel.find({Table: Table._id },function(err, Ads){
+			AdModel.count({Table: Table._id }, function(err, count){
 				if (err)
 				{
 					console.log("Error:\n");
@@ -19,17 +19,60 @@ exports.show = function(req, res, next)
 				}
 				else
 				{
-					res.render("tables/table.jade", 
+					AdModel.find({Table: Table._id },function(err, Ads){
+						if (err)
+						{
+							console.log("Error:\n");
+							console.log(err);
+						}
+						else
+						{
+							console.log(count);
+							res.render("tables/table.jade", 
+							{
+								title: "Ads Table",
+								text: "Current department: ",
+								Table: Table,
+								Ads: Ads,
+								user: req.user,
+								next: count > 10											
+							});
+
+						}
+					}).limit(10).sort({Date: -1});
+				}					
+			});			
+		}
+	});
+}
+
+exports.next = function(req, res, next)
+{		
+	AdModel.count({Table: req.params.Id }, function(err, count){
+		if (err)
+		{
+			console.log("Error:\n");
+			console.log(err);
+		}
+		else
+		{
+			AdModel.find({Table:  req.params.Id },function(err, Ads){
+				if (err)
+				{
+					console.log("Error:\n");
+					console.log(err);
+				}
+				else
+				{
+					res.render("tables/next_ads.jade", 
 					{
-						title: "Ads Table",
-						text: "Current department: ",
-						Table: Table,
 						Ads: Ads,
-						user: req.user						
+						user: req.user,
+						next: count - req.params.count > 10				
 					});
 
 				}
-			}).limit(10).sort({Date: -1});
+			}).skip(parseInt(req.params.count)).limit(10).sort({Date: -1});
 		}
 	});
 }

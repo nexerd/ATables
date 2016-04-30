@@ -1,11 +1,14 @@
 extends ../layout
 block content
-	style		
+	style
 		include ../../public/stylesheet/table.css
+	script(type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js")
+	script(type="text/javascript")
+		include ../../public/javascript/table.js
 	h1 Доска объявлений: #{Table.Name}	
 	form(action="/Ads/create/" + Table._id method="get")
 		input(type="submit" value="Добавить объявление")
-	.ads
+	#ads
 		- if (Ads)
 			- each Ad in Ads
 				.ad
@@ -15,4 +18,6 @@ block content
 					.buttom
 						.tag= 'Метка: ' + Ad.Tag
 						.date= Ad.Date
-						.user= 'Автор: ' + Ad.User.Name				
+						.user= 'Автор: ' + Ad.User.Name
+	- if(next)
+		#next= 'Следующие 10'	

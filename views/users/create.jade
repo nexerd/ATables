@@ -3,19 +3,19 @@ block content
 	form#signup(action="/Users/signup/" method="post") 	
 		p Логин:
 		p
-			input(type="text" name="username")		
+			input(type="text" required name="username")		
 		p Пароль:
 		p
-			input(type="password" name="password")		
+			input(type="password" required name="password")		
 		p Имя:
 		p
-			input(type="text" name="firstname")
+			input(type="text" required name="firstname")
 		p Фамилия:
 		p
-			input(type="text" name="secondname")
+			input(type="text" required name="secondname")
 		p Отчество:
 		p
-			input(type="text" name="thirdname")
+			input(type="text" required name="thirdname")
 		p
 			input(type="submit" value="Отправить")
 		
