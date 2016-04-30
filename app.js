@@ -61,24 +61,12 @@ initPassport(passport);
 var routes = require("./routes/route")(passport);
 app.use('/', routes);
 
-app.get("/", function(req, res) {
-	var DepartmentModel = require("./model/DepartmentsModel").DepartmentModel;	
-	DepartmentModel.findOne({Type: "Университет"}, function(err, Department)
-	{
-		if (err)
-			throw err;
-		DepartmentModel.find({BaseDepartment: Department._id}, function(err, SubDepartments){
-			if (err)
-				throw err;
-			res.render("index.jade", 
-				{
-					title: "Ads Table",
-					text: Department.Name,
-					Faculties: SubDepartments,
-					user: req.user
-				});
-		});
-	});	
+app.get("/", function(req, res, next) {
+  res.render("index.jade", {
+    header: "Добро пожаловать!",
+    text: "Этот интернето итернет приложение предназначено для публикации различных объявлений! :)",
+    user: req.user
+  });
 });
 
 // catch 404 and forward to error handler

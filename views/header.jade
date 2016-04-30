@@ -3,15 +3,26 @@ header
 		include ../public/stylesheet/header.css
 	- if (user)
 		#greeting= 'Добро пожаловать, ' + user.FirstName
-	.button#index
-		a(href='/') На главную
-	- if (user)
-		.button#profile
-			a(href='/Users/' + user._id) Личный кабинет
-		.button#logout
-			a(href='/Users/logout') Выход
-	- else
-		.button#signup
-			a(href='/Users/signup') Регистрация
-		.button#login
-			a(href='/Users/login') Вход
+	#menu
+		.button#index
+			a(href='/') На главную
+		.button
+			a(href='/Departments') Посмотреть объявления
+		.button
+			a(href='/nop') Поиск по тегам
+		- if (user)
+			.button
+				a(href='/nop') Написать объявление
+			.button
+				a(href='/nop') Горячее
+	#help-menu		
+		- if (user)
+			.button#profile
+				a(href='/Users/' + user._id) Личный кабинет
+			.button#logout
+				a(href='/Users/logout') Выход
+		- else
+			.button#signup
+				a(href='/Users/signup') Регистрация
+			.button#login
+				a(href='/Users/login') Вход

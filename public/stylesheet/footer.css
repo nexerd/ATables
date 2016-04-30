@@ -1,9 +1,10 @@
 footer{
-	margin: 10px;
-    font-style: italic;
+    background-color: #f4f4f4;
+    height: 20px;
+    min-width: 1200px;
+    text-align: center;
 }
-
 footer div {
-    display: inline-block;
-    margin: 5px;
+    display: inline;
+    margin-left: 5px;    
 }

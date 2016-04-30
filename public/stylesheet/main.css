@@ -1,15 +1,5 @@
 div#main {
-    height: 200px;
+    min-height: 600px;
     width: 800px;
     margin: 2px;
-}
-
-div#menu {
-    float: left;
-    width: 100px;
-}
-
-div#text {
-    float: right;
-    width: 600px;
 }

@@ -1,9 +1,26 @@
 header{
-	margin: 10px;
-    font-style: italic;
+    background-color: #f4f4f4;
+    height: 20px;
+    min-width: 1200px;
 }
 
 header div {
-    display: inline-block;
-    margin: 5px;
+    display: inline;
+}
+
+div#greeting {
+	float: left;
+	width: 250px;
+}
+
+div#menu{	
+	margin-left: 20px;
+}
+
+div#help-menu{
+	float: right;
+}
+
+div.button{
+	margin: 5px;
 }

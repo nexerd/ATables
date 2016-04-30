@@ -37,6 +37,8 @@ function DepartmentsRoute(router)
 {
 	var controller = require("../controllers/DepartmentsController");
 
+	router.get("/Departments/" , controller.main);
+
 	router.get("/Departments/:Id/" , controller.show);
 }
 

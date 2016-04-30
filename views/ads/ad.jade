@@ -13,6 +13,6 @@ block content
 				p= Comment.User.Name
 				p= Comment.Data
 	form(method="post")
-		input(type="text" name="commentText")
+		textarea(type="text" name="commentText" placeholder="Коментарий")
 		input(type="submit" value="Добавить")
 		input(type="hidden" value="put" name="_method")

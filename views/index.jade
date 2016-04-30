@@ -3,9 +3,8 @@ block content
 	style
 		include ../public/stylesheet/main.css
 	#main
-		include menu
-		#text
-			h1 #{text}
-			- each item in Faculties
-				p
-					a(href="Departments/"+item._id)= item.Name	
+		#article
+			h1 #{header}
+		#text #{text}
+
+		
