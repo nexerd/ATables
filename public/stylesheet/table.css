@@ -1,0 +1,54 @@
+div.ad {
+    margin: 10px;
+    background-color: rgba(212, 223, 255, 0.29);
+    border-radius: 20px;
+    min-height: 150px;
+    max-width: 1000px;	
+}
+
+div.ads{
+	margin-left: 20px;
+}
+
+div.text{
+	min-height: 150px;
+	border-bottom: 1px #DEDEDE solid;
+	padding-top: 20px;
+}
+
+div.topic{
+	margin-top: 25px;	
+	text-align: center;
+	border-bottom: 1px #DEDEDE solid;
+	background-color: rgba(33, 67, 165, 0.29);	
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+}
+
+div.buttom{
+	padding: 7px;
+}
+
+div.buttom div{
+	display: inline-block;
+	text-align: center;
+	min-width: 50px;
+	height: 20px;
+	background-color: rgba(33, 67, 165, 0.29);	
+	border-radius: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+div.tag{	
+	float: left;
+}
+
+div.user{
+	float: right;
+	margin-right: 40px;
+}
+
+div.date{
+	margin-left: 40px;
+}

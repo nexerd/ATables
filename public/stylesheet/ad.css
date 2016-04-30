@@ -1,0 +1,54 @@
+#main{
+	margin-top: 40px;
+	margin-left: 10px;
+}
+
+#ad{
+	margin: 10px;
+    background-color: rgba(212, 223, 255, 0.29);
+    border-radius: 20px;
+    min-height: 150px;
+    max-width: 400px;
+}
+
+div.name{
+	margin-top: 25px;	
+	text-align: center;
+	border-bottom: 1px #DEDEDE solid;
+	background-color: rgba(33, 67, 165, 0.29);	
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+}
+
+div.text{
+	min-height: 150px;
+	border-bottom: 1px #DEDEDE solid;
+	padding-top: 20px;
+}
+
+.bottom div{
+	margin-top: 4px;
+	text-align: center;
+	height: 20px;
+	background-color: rgba(33, 67, 165, 0.29);	
+	border-radius: 10px;
+}
+
+.comment{
+	border: 2px #DEDEDE solid;
+	background-color: rgba(33, 67, 165, 0.5);	
+	margin-top: 10px;
+}
+
+.comment div{
+	margin-top: 4px;
+	text-align: center;
+	height: 20px;
+	background-color: rgba(33, 67, 165, 0.29);	
+	border-radius: 10px;
+}
+
+form{
+	margin-top: 10px;
+}
+

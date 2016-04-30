@@ -1,15 +1,18 @@
 extends ../layout
 block content
+	style		
+		include ../../public/stylesheet/table.css
 	h1 Доска объявлений: #{Table.Name}	
 	form(action="/Ads/create/" + Table._id method="get")
 		input(type="submit" value="Добавить объявление")
-	- if (Ads)
-		- each Ad in Ads
-			div
-				p
-					a(href="/Ads/" + Ad._id)= "Тема: " + Ad.Name
-				p= "Объявление: " + Ad.Text
-				p= "Метка: " + Ad.Tag
-				p= "Дата: " + Ad.Date
-				p= "============================================"
-				p
+	.ads
+		- if (Ads)
+			- each Ad in Ads
+				.ad
+					.topic
+						a(href="/Ads/" + Ad._id)= Ad.Name
+					.text= Ad.Text
+					.buttom
+						.tag= 'Метка: ' + Ad.Tag
+						.date= Ad.Date
+						.user= 'Автор: ' + Ad.User.Name				

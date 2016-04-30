@@ -1,18 +1,24 @@
 extends ../layout
 block content
-	h1 #{Ad.Name}
-	p Текст:
-	p #{Ad.Text}
-	P Метка: #{Ad.Tag}
-	P Автор: #{Ad.User.Name}
-	p Комментарии:
-	p
-		- if (Ad.Comments)
-			- each Comment in Ad.Comments
-				p= Comment.Text
-				p= Comment.User.Name
-				p= Comment.Data
-	form(method="post")
-		textarea(type="text" name="commentText" placeholder="Коментарий")
-		input(type="submit" value="Добавить")
-		input(type="hidden" value="put" name="_method")
+	style		
+		include ../../public/stylesheet/ad.css
+	#main
+		#ad
+			.name #{Ad.Name}
+			.text #{Ad.Text}
+			.bottom
+				.tag #{Ad.Tag}
+				.user #{Ad.User.Name}
+				.date #{Ad.Date}
+		p Комментарии:
+		.comments
+			- if (Ad.Comments)
+				- each Comment in Ad.Comments
+					.comment
+						.comment_user= 'Автор: ' + Comment.User.Name
+						.comment_text= Comment.Text						
+						.comment_date= Comment.Data
+		form(method="post")
+			textarea(type="text" name="commentText" placeholder="Коментарий")
+			input(type="submit" value="Добавить")
+			input(type="hidden" value="put" name="_method")
