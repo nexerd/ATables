@@ -18,6 +18,7 @@ module.exports = function(passport){
                         console.log('Incorrect password.');
                         return done(null, false, { message: 'Incorrect password.' });
                     }
+                    console.log(username + ' is longin!');
                     return done(null, user);
                 }
             );
