@@ -43,8 +43,8 @@ app.use(methodOverride(function(req, res){
 
 app.use(cookieParser());
 app.use(session({secret: 'mySecretKey', 
-                 saveUninitialized: true,
-                 resave: true,
+                 saveUninitialized: false,
+                 resave: false,
                  store: require('mongoose-session')(mongoose)
              }));
 
