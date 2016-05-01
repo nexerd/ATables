@@ -8,7 +8,7 @@
     background-color: rgba(212, 223, 255, 0.29);
     border-radius: 20px;
     min-height: 150px;
-    max-width: 400px;
+    max-width: 600px;
 }
 
 div.name{
@@ -24,6 +24,7 @@ div.text{
 	min-height: 150px;
 	border-bottom: 1px #DEDEDE solid;
 	padding-top: 20px;
+	text-align: left;
 }
 
 .bottom div{
@@ -38,6 +39,7 @@ div.text{
 	border: 2px #DEDEDE solid;
 	background-color: rgba(33, 67, 165, 0.5);	
 	margin-top: 10px;
+	max-width: 600px;
 }
 
 .comment div{
@@ -46,6 +48,10 @@ div.text{
 	height: 20px;
 	background-color: rgba(33, 67, 165, 0.29);	
 	border-radius: 10px;
+}
+.comment_text{
+	min-height: 100px;
+	text-align: left;
 }
 
 form{

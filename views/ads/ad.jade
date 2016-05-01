@@ -1,7 +1,10 @@
 extends ../layout
 block content
-	style		
+	style
 		include ../../public/stylesheet/ad.css
+	script(type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js")
+	script(type="text/javascript")
+		include ../../public/javascript/ad.js
 	#main
 		#ad
 			.name #{Ad.Name}
@@ -10,14 +13,22 @@ block content
 				.tag #{Ad.Tag}
 				.user #{Ad.User.Name}
 				.date #{Ad.Date}
+				- if (user && Ad.User.Id.toString() == user._id.toString())
+					.update= 'Редактировать'
+					.delete= 'Удалить'
+			.id(hidden="true" value= Ad._id)
 		p Комментарии:
 		.comments
 			- if (Ad.Comments)
 				- each Comment in Ad.Comments
 					.comment
 						.comment_user= 'Автор: ' + Comment.User.Name
-						.comment_text= Comment.Text						
+						.comment_text= Comment.Text
 						.comment_date= Comment.Data
+						- if (Comment.User.Id.toString() == user._id.toString())
+							.comment_update= 'Редактировать'
+							.comment_delete= 'Удалить'
+						.comment_id(hidden="true" value= Comment._id)
 		form(method="post")
 			textarea(type="text" required name="commentText" placeholder="Коментарий")
 			input(type="submit" value="Добавить")

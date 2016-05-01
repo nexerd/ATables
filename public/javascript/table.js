@@ -1,9 +1,7 @@
  var count = 0;
  $(function() {
  	$('#next').click(function(){
- 		var addr = window.location.href;
- 		var params = addr.split('/Tables/')[1].split('?');
- 		var _id = params[0];
+ 		var _id = $("#table_id").attr("value");
  		count += 10;
  		$.ajax({
  			type: "GET",

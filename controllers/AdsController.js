@@ -5,7 +5,10 @@ exports.show = function(req, res, next)
 	AdModel.findById( { _id: req.params.Id }, function(err, Ad){
 		if (err)
 			throw err;
-		res.render("ads/ad.jade", {	Ad: Ad });
+		res.render("ads/ad.jade", {
+			Ad: Ad,
+			user: req.user 
+		});
 	});
 }
 
@@ -53,11 +56,34 @@ exports.update = function(req, res, next)
 	 			}
 	 		}
 	 	} 
-	 },
-		function(err)
-		{
+	 },	function(err) {
 			if (err)
 				throw err;
 			res.redirect("/Ads/" + req.params.Id);
-		});
+		}
+	);
 }
+
+exports.delete = function(req, res, next){
+	var tableId;
+	AdModel.findById( { _id: req.params.Id }, function(err, Ad){
+		if (err){
+			throw err
+		}
+		else
+		{
+			tableId = Ad.Table;	
+			AdModel.findOneAndRemove({ _id: req.params.Id}, function(err){
+				if (err){
+					throw err
+				}
+				else
+				{
+					console.log("Secces delete ad " + req.params.Id);
+					//res.redirect("/Tables/" + tableId);
+					res.send("/Tables/" + tableId);
+				}
+			})		
+		}
+	});	
+};

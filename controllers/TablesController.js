@@ -27,7 +27,6 @@ exports.show = function(req, res, next)
 						}
 						else
 						{
-							console.log(count);
 							res.render("tables/table.jade", 
 							{
 								title: "Ads Table",

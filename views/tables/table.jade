@@ -6,6 +6,7 @@ block content
 	script(type="text/javascript")
 		include ../../public/javascript/table.js
 	h1 Доска объявлений: #{Table.Name}	
+	#table_id(hidden="true" value=Table._id) 
 	form(action="/Ads/create/" + Table._id method="get")
 		input(type="submit" value="Добавить объявление")
 	#ads

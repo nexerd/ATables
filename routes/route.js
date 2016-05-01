@@ -33,6 +33,8 @@ function AdsRoute(router)
 	router.post("/Ads/new/:Id/" , isAuthenticated, controller.new);
 
 	router.put("/Ads/:Id/" , isAuthenticated, controller.update);	
+
+	router.delete("/Ads/:Id/", isAuthenticated, controller.delete);
 }
 
 function DepartmentsRoute(router)
