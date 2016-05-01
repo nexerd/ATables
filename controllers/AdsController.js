@@ -15,15 +15,15 @@ exports.show = function(req, res, next)
 exports.new = function(req, res, next)
 {
 	var Ad = new AdModel({
-	Table: req.params.Id,
-	Name: req.body.Name,
-	Text:req.body.Text,
-	Tag: req.body.Tag,
-	Date: new Date(),
-	User: {
-		Id: req.user._id,
-		Name: req.user.UserName
-	}
+		Table: req.params.Id,
+		Name: req.body.Name,
+		Text:req.body.Text,
+		Tag: req.body.Tag,
+		Date: new Date(),
+		User: {
+			Id: req.user._id,
+			Name: req.user.UserName
+		}
 	});
 	Ad.save(function(err){
 		if (err)
@@ -44,23 +44,37 @@ exports.create = function(req, res, next)
 
 exports.update = function(req, res, next)
 {	
-	AdModel.update({ _id: req.params.Id },
-	 { $push: 
-	 	{ 
-	 		Comments: {
-	 			Text: req.body.commentText,
-	 			Data: new Date(),
-	 			User: {
-	 				Id: req.user._id,
-	 				Name: req.user.UserName
-	 			}
-	 		}
-	 	} 
-	 },	function(err) {
-			if (err)
-				throw err;
-			res.redirect("/Ads/" + req.params.Id);
+	var update;
+	if (req.body.commentText)
+	{
+		update = {
+			$push: 
+			{ 
+				Comments: {
+					Text: req.body.commentText,
+					Data: new Date(),
+					User: {
+						Id: req.user._id,
+						Name: req.user.UserName
+					}
+				}
+			} 
+		};
+	}
+	else
+	{
+		if (!req.body.AdText)
+			throw "Полохой запрос на обновление текст объявлния";
+		update = {
+			Text: req.body.AdText
 		}
+	}
+	AdModel.update({ _id: req.params.Id }, update,	function(err) {
+		if (err)
+			throw err;
+		console.log(req.body);
+		res.send("/Ads/" + req.params.Id);
+	}
 	);
 }
 
@@ -108,4 +122,25 @@ exports.deleteComment = function(req, res, next){
 			});
 		}
 	});	
+};
+
+exports.updateComment = function(req, res, next){
+	var Comments;
+	var num = req.params.number;
+	AdModel.findOne({_id: req.params.Id}, function(err, Ad){
+		if (err){
+			throw err
+		}
+		else
+		{
+			Comments = Ad.Comments;
+			Comments[num].Text= req.body.CommentText;
+			AdModel.update({ _id: req.params.Id }, { $set: { Comments: Comments } }, function(err) {
+				if (err)
+					throw err;
+				res.send("/Ads/" + Ad._id);
+			});
+		}
+	});
+	
 };

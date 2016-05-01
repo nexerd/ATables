@@ -34,6 +34,8 @@ function AdsRoute(router)
 
 	router.put("/Ads/:Id/" , isAuthenticated, controller.update);	
 
+	router.put("/Ads/:Id/comment/:number/", isAuthenticated, controller.updateComment);	
+
 	router.delete("/Ads/:Id/", isAuthenticated, controller.delete);
 
 	router.delete("/Ads/:Id/comment/:number/", isAuthenticated, controller.deleteComment);

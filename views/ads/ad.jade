@@ -24,13 +24,12 @@ block content
 				- each Comment in Ad.Comments
 					.comment
 						.comment_user= 'Автор: ' + Comment.User.Name
-						.comment_text= Comment.Text
+						.comment_text(value=numberOfComment)= Comment.Text
 						.comment_date= Comment.Data
 						- if (user && Comment.User.Id.toString() == user._id.toString())
 							.comment_update(value=numberOfComment)= 'Редактировать'
 							.comment_delete(value=numberOfComment)= 'Удалить'
 						- numberOfComment++
-		form(method="post")
-			textarea(type="text" required name="commentText" placeholder="Коментарий")
+		form(id="NewCommentForm")
+			textarea(type="text" required name="commentText" id="commentText" placeholder="Коментарий")
 			input(type="submit" value="Добавить")
-			input(type="hidden" value="put" name="_method")
