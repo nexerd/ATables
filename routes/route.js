@@ -35,6 +35,8 @@ function AdsRoute(router)
 	router.put("/Ads/:Id/" , isAuthenticated, controller.update);	
 
 	router.delete("/Ads/:Id/", isAuthenticated, controller.delete);
+
+	router.delete("/Ads/:Id/comment/:number/", isAuthenticated, controller.deleteComment);
 }
 
 function DepartmentsRoute(router)

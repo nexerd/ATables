@@ -20,15 +20,16 @@ block content
 		p Комментарии:
 		.comments
 			- if (Ad.Comments)
+				- numberOfComment = 0
 				- each Comment in Ad.Comments
 					.comment
 						.comment_user= 'Автор: ' + Comment.User.Name
 						.comment_text= Comment.Text
 						.comment_date= Comment.Data
-						- if (Comment.User.Id.toString() == user._id.toString())
-							.comment_update= 'Редактировать'
-							.comment_delete= 'Удалить'
-						.comment_id(hidden="true" value= Comment._id)
+						- if (user && Comment.User.Id.toString() == user._id.toString())
+							.comment_update(value=numberOfComment)= 'Редактировать'
+							.comment_delete(value=numberOfComment)= 'Удалить'
+						- numberOfComment++
 		form(method="post")
 			textarea(type="text" required name="commentText" placeholder="Коментарий")
 			input(type="submit" value="Добавить")

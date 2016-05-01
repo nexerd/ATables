@@ -87,3 +87,25 @@ exports.delete = function(req, res, next){
 		}
 	});	
 };
+
+exports.deleteComment = function(req, res, next){
+	AdModel.findOne({_id: req.params.Id}, function(err, Ad){
+		if (err){
+			throw err
+		}
+		else
+		{
+			Ad.Comments.splice(req.params.number, 1);			
+			Ad.save(function(err){
+				if (err)
+				{
+					throw err;
+				}		
+				else
+				{
+					res.send("/Ads/" + Ad._id);
+				}
+			});
+		}
+	});	
+};

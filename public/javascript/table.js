@@ -1,5 +1,6 @@
- var count = 0;
+var count = 0;
  $(function() {
+
  	$('#next').click(function(){
  		var _id = $("#table_id").attr("value");
  		count += 10;
@@ -13,7 +14,6 @@
  					$("#ads").append(ads);
  					$("#next").show();
  				}
-
  			}
  		});
  	});
