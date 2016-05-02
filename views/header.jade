@@ -7,14 +7,14 @@ header
 		.button#index
 			a(href='/') На главную
 		.button
-			a(href='/Departments') Посмотреть объявления
+			a(href='/Departments') Подразделение		
 		.button
-			a(href='/nop') Поиск по тегам
+			a(href='/nop') Поиск по объявлениям
 		- if (user)
 			.button
-				a(href='/nop') Написать объявление
+				a(href='/Users/Departments') Мои подразделения
 			.button
-				a(href='/nop') Горячее
+				a(href='/Users/Hot/') Горячее
 	#help-menu
 		- if (user)
 			.button#profile

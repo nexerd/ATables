@@ -1,0 +1,11 @@
+extends ../layout
+block content
+	style
+		include ../../public/stylesheet/userDepartments.css
+	#main
+		- if (user.Departments)
+			- each department in user.Departments
+				.department(value= department._id)
+					.department_type= department.Type
+					.department_name= department.Name
+					a(id='department_link' href="/Tables/"+ department.Table)= 'Перейти'

@@ -62,6 +62,12 @@ function UsersRoute(router, passport)
 
 	router.get("/Users/login/" , controller.login);
 
+	router.get("/Users/login/" , controller.login);
+
+	router.get("/Users/Departments/" , isAuthenticated, controller.departments);
+
+	router.get("/Users/Hot/" , isAuthenticated, controller.hot);
+
 	router.get("/Users/account/" , isAuthenticated, controller.account);
 
 	router.put("/User/account/department/" , controller.updateDepartment);

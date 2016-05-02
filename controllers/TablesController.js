@@ -1,5 +1,6 @@
 var AdModel = require("../model/AdsModel").AdModel;	
 var TableModel = require("../model/TablesModel").TableModel;	
+var UserModel = require("../model/UsersModel").UserModel;	
 
 exports.show = function(req, res, next)
 {	
@@ -11,6 +12,27 @@ exports.show = function(req, res, next)
 		}
 		else
 		{	
+			if (req.user)
+			{
+				var id = req.user._id;
+				UserModel.findById({_id: id}, function(err, User){
+					for (var i=0; i < User.Departments.length; i++)
+					{
+						if (Table._id.toString() == User.Departments[i].Table.toString())
+						{		
+							var department = User.Departments[i];
+							User.Departments.splice(i, 1);							
+							department.LastOpened = new Date();
+							User.Departments.push(department);
+							User.save(function(err){
+								if (err)
+									throw err;
+							})
+							break;
+						}
+					}
+				});
+			}
 			AdModel.count({Table: Table._id }, function(err, count){
 				if (err)
 				{
