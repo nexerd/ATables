@@ -43,7 +43,11 @@ function AdsRoute(router)
 
 function DepartmentsRoute(router)
 {
-	var controller = require("../controllers/DepartmentsController");
+	var controller = require("../controllers/DepartmentsController");	
+
+	router.get("/Departments/select/" , controller.mainSelect);
+
+	router.get("/Departments/select/:Id/" , controller.showSelect);
 
 	router.get("/Departments/" , controller.main);
 
@@ -57,6 +61,12 @@ function UsersRoute(router, passport)
 	router.get("/Users/signup/" , controller.create);
 
 	router.get("/Users/login/" , controller.login);
+
+	router.get("/Users/account/" , isAuthenticated, controller.account);
+
+	router.put("/User/account/department/" , controller.updateDepartment);
+
+	router.delete("/User/account/department/" , controller.deleteDepartment);
 
 	router.post("/Users/signup/" , passport.authenticate('signup', {		
 		    successRedirect: '/',
@@ -76,7 +86,7 @@ function UsersRoute(router, passport)
 	  })
 	);
 
-	router.get("/User/:Id" , controller.show);
+	router.get("/User/:Id/" , controller.show);
 }
 
 function isAuthenticated(req, res, next) {

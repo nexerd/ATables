@@ -30,8 +30,8 @@ var UserSchema = mongoose.Schema({
 		type : String,
 		required: true
 	},
-	Department: {
-		type : mongoose.Schema.Types.ObjectId,
+	Departments: {
+		type : Array,
 		//required: true
 	}
 });

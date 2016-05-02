@@ -1,0 +1,4 @@
+option(value="")
+- if (Departments)
+	- each Department in Departments
+		option(value= Department._id)= Department.Type + ' ' + Department.Name

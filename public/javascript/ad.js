@@ -69,7 +69,8 @@ $(function() {
 		});
 	});
 
-	$("#NewCommentForm").submit(function(){		
+	$("#NewCommentForm").submit(function(e){	
+		e.preventDefault();	
 		var _id = $("#ad .id").attr('value');
 		$.ajax({
 				type: 'PUT',

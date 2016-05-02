@@ -1,0 +1,21 @@
+extends ../layout
+block content
+	style
+		include ../../public/stylesheet/account.css
+	script(type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js")
+	script(type="text/javascript")
+		include ../../public/javascript/account.js
+	#main
+		#user
+			#FirstName #{user.FirstName}
+			#SecondName #{user.SecondName}
+			#ThirdName #{user.ThirdName}
+		#departments
+			Подразделения:
+			- if (user.Departments)
+				- each department in user.Departments
+					.department(value= department._id)
+						.department_type= department.Type
+						.department_name= department.Name
+						.department_delete(value= department.Id)= 'Удалить'
+		#addDepartment Добавить

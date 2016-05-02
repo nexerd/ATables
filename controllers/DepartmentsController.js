@@ -46,3 +46,32 @@ exports.main = function(req, res, next){
 		});
 	});	
 };
+
+exports.mainSelect = function(req, res, next){
+	DepartmentModel.findOne({Type: "Университет"}, function(err, Department)
+	{
+		res.send(Department);
+	});	
+};
+
+exports.showSelect = function(req, res, next){
+	DepartmentModel.findById(req.params.Id, function(err, Department){
+		if (err)
+		{
+			console.log(err);
+			throw err;
+		}		
+		DepartmentModel.find({BaseDepartment: Department._id}, function(err, SubDepartments){
+			if (err)
+			{
+				console.log(err);
+				throw err;
+			}
+			res.render("departments/select.jade", 
+					{
+						Departments: SubDepartments					
+					});
+		});
+
+	});
+};
