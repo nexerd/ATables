@@ -8,8 +8,7 @@ var methodOverride = require("method-override");
 var cookieSession = require("cookie-session");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
-var mongoose = require("./model/mongooseConnect")	
-var config = require("./config");
+var mongoose = require("./model/mongooseConnect");	
 
 var fs = require("fs");
 
@@ -64,7 +63,7 @@ app.use('/', routes);
 app.get("/", function(req, res, next) {
   res.render("index.jade", {
     header: "Добро пожаловать!",
-    text: "У моей Ксюши самая красивая попа во всем универе <3",
+    text: "Просто никому не нужный сервис бесполезных объявлений.",
     user: req.user
   });
 });

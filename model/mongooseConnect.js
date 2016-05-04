@@ -1,28 +1,17 @@
 var mongoose = require("mongoose");
+var config = require("../config");
 
-var url = process.env.OPENSHIFT_MONGODB_DB_URL ?
-	 process.env.OPENSHIFT_MONGODB_DB_URL + 'test' :
-	 		'mongodb://localhost:27017/ATableTest0';	
-var options = {
-  user: 'admin',
-  pass: 'ygNX3widJ6VU'
-}
-
-console.log(url);
-if (process.env.OPENSHIFT_MONGODB_DB_URL)
-	{		
-		mongoose.connect(url, options);
-	}
-else
-	mongoose.connect(url);
+var dbConfig = config.get('database');
+var uri = dbConfig.url + dbConfig.name;
+mongoose.connect(uri, dbConfig.options);
 
 mongoose.connection.on("close",  function()
 {	
-	console.log("Connection  " + url + "  close...");
+	console.log("Connection  " + uri + "  close...");
 });
 mongoose.connection.on("open",  function()
 {	
-	console.log("Connection " + url + " open...");
+	console.log("Connection " + uri + " open...");
 });
 mongoose.connection.on("error",  function(err)
 {	
