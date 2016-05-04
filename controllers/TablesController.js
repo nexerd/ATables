@@ -20,10 +20,7 @@ exports.show = function(req, res, next)
 					{
 						if (Table._id.toString() == User.Departments[i].DocDepartment.TableId.toString())
 						{		
-							var department = User.Departments[i];
-							User.Departments.splice(i, 1);							
-							department.LastOpened = new Date();
-							User.Departments.push(department);
+							User.Departments[i].LastOpened = new Date();
 							User.save(function(err){
 								if (err)
 									throw err;
