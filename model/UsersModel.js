@@ -1,5 +1,7 @@
 var crypto = require("crypto")
 var mongoose = require("mongoose");
+var DepartmentSchema = require("../model/DepartmentsModel").DepartmentSchema;	
+
 var UserSchema = mongoose.Schema({
 	UserName: {
 		type : String,
@@ -31,7 +33,10 @@ var UserSchema = mongoose.Schema({
 		required: true
 	},
 	Departments: {
-		type : Array,
+		type : [{
+			DocDepartment: DepartmentSchema,
+			LastOpened: Date
+		}]
 		//required: true
 	}
 });

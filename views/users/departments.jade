@@ -5,7 +5,7 @@ block content
 	#main
 		- if (user.Departments)
 			- each department in user.Departments
-				.department(value= department._id)
-					.department_type= department.Type
-					.department_name= department.Name
-					a(id='department_link' href="/Tables/"+ department.Table)= 'Перейти'
+				.department(value= department.DocDepartment._id)
+					.department_type= department.DocDepartment.Type
+					.department_name= department.DocDepartment.Name
+					a(id='department_link' href="/Tables/"+ department.DocDepartment.TableId)= 'Перейти'

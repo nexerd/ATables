@@ -14,8 +14,8 @@ block content
 			Подразделения:
 			- if (user.Departments)
 				- each department in user.Departments
-					.department(value= department._id)
-						.department_type= department.Type
-						.department_name= department.Name
-						.department_delete(value= department.Id)= 'Удалить'
+					.department(value= department.DocDepartment._id)
+						.department_type= department.DocDepartment.Type
+						.department_name= department.DocDepartment.Name
+						.department_delete(value= department.DocDepartment._id)= 'Удалить'
 		#addDepartment Добавить

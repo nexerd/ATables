@@ -19,3 +19,4 @@ var DepartmentSchema = mongoose.Schema({
 
 var DepartmentModel = mongoose.model("Departments", DepartmentSchema);
 exports.DepartmentModel = DepartmentModel;
+exports.DepartmentSchema = DepartmentSchema;

@@ -29,7 +29,7 @@ exports.updateDepartment = function(req, res, next){
 				throw err; 
 			var key = true;
 			User.Departments.forEach(function(dep){
-				if (dep.Id.toString() == Department._id.toString())
+				if (dep.DocDepartment._id.toString() == Department._id.toString())
 				{						
 					key = false;
 				}
@@ -40,10 +40,7 @@ exports.updateDepartment = function(req, res, next){
 				return;
 			}	
 			User.Departments.push({
-				Type: Department.Type,
-				Table: Department.TableId,
-				Name: Department.Name,
-				Id: Department._id,
+				DocDepartment: Department,
 				LastOpened: new Date()
 			});
 			User.save(function(err){
@@ -66,7 +63,7 @@ exports.deleteDepartment = function(req, res, next){
 			throw err; 
 		var pos = -1;
 		for (var i=0; i<User.Departments.length; i++)
-			if (req.body.Id.toString() == User.Departments[i].Id.toString())
+			if (req.body.Id.toString() == User.Departments[i].DocDepartment._id.toString())
 			{
 				pos = i;
 				break;
@@ -97,7 +94,7 @@ exports.hot = function(req, res, next){
 	var Ads = [];
 
 	req.user.Departments.forEach(function(department){
-		AdModel.find({ Table: department.Table, "Date": { $gt: department.LastOpened} },
+		AdModel.find({ Table: department.DocDepartment.TableId, "Date": { $gt: department.LastOpened} },
 		function(err , ads)	{
 			if (err)
 				throw err;
@@ -108,13 +105,9 @@ exports.hot = function(req, res, next){
 	
 	UserModel.findById({_id: req.user._id}, function(err, User){
 		if (err)
-				throw err;
-		var departments = User.Departments;							
-		departments.forEach(function(dep){dep.LastOpened = new Date(); });
-		departments.push(0);
-		departments.pop();
-		req.user.Departments = departments;
-		User.Departments = departments;
+				throw err;					
+		User.Departments.forEach(function(dep){dep.LastOpened = new Date(); });
+		req.user.Departments = User.Departments
 		User.save(function(err){
 			if (err)
 				throw err;

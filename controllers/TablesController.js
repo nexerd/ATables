@@ -18,7 +18,7 @@ exports.show = function(req, res, next)
 				UserModel.findById({_id: id}, function(err, User){
 					for (var i=0; i < User.Departments.length; i++)
 					{
-						if (Table._id.toString() == User.Departments[i].Table.toString())
+						if (Table._id.toString() == User.Departments[i].DocDepartment.TableId.toString())
 						{		
 							var department = User.Departments[i];
 							User.Departments.splice(i, 1);							
