@@ -5,24 +5,34 @@ var AdSchema = mongoose.Schema({
 		required: true
 	},
 	"Name": {
-		type : mongoose.Schema.Types.String,
+		type : String,
 		required: true
 	},
 	"Text": {
-		type : mongoose.Schema.Types.String,
+		type : String,
 		required: true
 	},
 	"Tag": {
-		type : mongoose.Schema.Types.String,
+		type : String,
 		required: true
 	},
 	"Date": {
 		type : Date,
+		default: Date.now,
 		required: true
 	},
 	"Comments": {
-		type : Array,
-		//required: true
+		type : [ {
+			Text: String,
+			Data: {
+				type: Date,
+				default: Date.now,
+			},
+			User: {
+				Id: mongoose.Schema.Types.ObjectId,
+				Name: String
+			}
+		} ]
 	},
 	"User" : {
 		"Id": {

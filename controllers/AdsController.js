@@ -3,8 +3,10 @@ var AdModel = require("../model/AdsModel").AdModel;
 exports.show = function(req, res, next)
 {		
 	AdModel.findById( { _id: req.params.Id }, function(err, Ad){
-		if (err)
+		if (err) 
+		{
 			throw err;
+		}
 		res.render("ads/ad.jade", {
 			Ad: Ad,
 			user: req.user 
@@ -19,7 +21,7 @@ exports.new = function(req, res, next)
 		Name: req.body.Name,
 		Text:req.body.Text,
 		Tag: req.body.Tag,
-		Date: new Date(),
+		//Date: new Date(),
 		User: {
 			Id: req.user._id,
 			Name: req.user.UserName
@@ -30,10 +32,7 @@ exports.new = function(req, res, next)
 		{
 			throw err;
 		}		
-		else
-		{
-			res.redirect("/Tables/" + Ad.Table);
-		}
+		res.redirect("/Tables/" + Ad.Table);
 	});
 }
 
@@ -52,7 +51,7 @@ exports.update = function(req, res, next)
 			{ 
 				Comments: {
 					Text: req.body.commentText,
-					Data: new Date(),
+					//Data: new Date(),
 					User: {
 						Id: req.user._id,
 						Name: req.user.UserName
@@ -79,25 +78,16 @@ exports.update = function(req, res, next)
 }
 
 exports.delete = function(req, res, next){
-	var tableId;
-	AdModel.findById( { _id: req.params.Id }, function(err, Ad){
+
+	AdModel.findOneAndRemove({ _id: req.params.Id}, function(err, Ad)
+	{
 		if (err){
 			throw err
 		}
 		else
 		{
-			tableId = Ad.Table;	
-			AdModel.findOneAndRemove({ _id: req.params.Id}, function(err){
-				if (err){
-					throw err
-				}
-				else
-				{
-					console.log("Secces delete ad " + req.params.Id);
-					//res.redirect("/Tables/" + tableId);
-					res.send("/Tables/" + tableId);
-				}
-			})		
+			console.log("Secces delete ad " + req.params.Id);
+			res.send("/Tables/" + Ad.Table);
 		}
 	});	
 };
@@ -133,9 +123,8 @@ exports.updateComment = function(req, res, next){
 		}
 		else
 		{
-			Comments = Ad.Comments;
-			Comments[num].Text= req.body.CommentText;
-			AdModel.update({ _id: req.params.Id }, { $set: { Comments: Comments } }, function(err) {
+			Ad.Comments[num].Text = req.body.CommentText;
+			Ad.save(function(err){
 				if (err)
 					throw err;
 				res.send("/Ads/" + Ad._id);
