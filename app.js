@@ -10,8 +10,7 @@ var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var mongoose = require("./model/mongooseConnect");	
 
-var fs = require("fs");
-
+//var fs = require("fs");
 //var LogStream = fs.createWriteStream(__dirname + "/logger.log", {flags: 'w'});
 
 var app = express();

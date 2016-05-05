@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('ATable');
+var debug = require('../Debug/debug')('ATables:app')
 var http = require('http');
 var config = require("../config");
 
@@ -84,6 +84,5 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
-  //debug('Listening on ' + addr);
-  console.log('Listening ' + addr.address + ':' + addr.port);
+  debug('Listening ' + addr.address + ':' + addr.port);
 }
