@@ -1,21 +1,23 @@
 var mongoose = require("mongoose");
 var config = require("../config");
 
+var debug = require('../Debug')('ATables:Mongoose')
+
 var dbConfig = config.get('database');
 var uri = dbConfig.url + dbConfig.name;
 mongoose.connect(uri, dbConfig.options);
 
 mongoose.connection.on("close",  function()
 {	
-	console.log("Connection  " + uri + "  close...");
+	debug("Connection  " + uri + "  close...");
 });
 mongoose.connection.on("open",  function()
 {	
-	console.log("Connection " + uri + " open...");
+	debug("Connection " + uri + " open...");
 });
 mongoose.connection.on("error",  function(err)
 {	
-	console.log(err);
+	debug(err);
 });
 
 module.exports = mongoose;

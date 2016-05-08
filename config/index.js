@@ -2,7 +2,7 @@ var path = require("path");
 var nconf = require('nconf');
 
 process.env.DEBUG = 'ATables:*';
-var debug = require('../Debug/debug')('ATables:nconf')
+var debug = require('../Debug')('ATables:nconf')
 
 nconf.argv()
 	.env()

@@ -75,33 +75,25 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
+var debug = require('./Debug')('ATables:app')
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    console.log(err.message);
-  	console.log(err);
-    res.status(err.status || 500);
-    res.render('error', {
+app.use(function(err, req, res, next) {
+  debug(err);
+  if (err.status){
+    res.status(err.status);
+    res.render('error.jade', {
       message: err.message,
       error: err
     });
+  }
+  else{
+   res.status("400");
+   res.render('error.jade', {
+    message: "Bad request",
+    error: "400! WTF!?"
   });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  console.log(err.message);
-  console.log(err);
-  res.status(err.status || 500);
-  res.render('error.jade', {
-    message: err.message,
-    error: {}
-  });
+ } 
 });
-
 module.exports = app;	
 
 
