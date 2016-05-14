@@ -1,5 +1,8 @@
 extends ../layout
 block content
+	script(type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js")
+	script(type="text/javascript")
+		include ../../public/javascript/root_users.js
 	br
 	br
 	br
@@ -9,4 +12,5 @@ block content
 				.FistName= User.FistName
 				.SecondName= User.SecondName
 				.ThirdName= User.ThirdName
+				.detele_user(value= User._id)= 'Удалить'
 			br

@@ -1,5 +1,8 @@
 extends ../layout
 block content
+	script(type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js")
+	script(type="text/javascript")
+		include ../../public/javascript/root_ads.js
 	br
 	br
 	br
@@ -13,5 +16,6 @@ block content
 					.tag= 'Метка: ' + Ad.Tag
 					.date= Ad.Date
 					.user= 'Автор: ' + Ad.User.Name
+					.detele_ad(value= Ad._id)= 'Удалить'
 	- if(Ads.length == 10)
 		a(href='/Admin/ads/' + (num + 10))= 'Следующие 10'
