@@ -110,6 +110,14 @@ function AdminRoute(router, passport)
 
 	router.delete("/Admin/departments/", isAdmin, controller.departmentsDelete);
 
+	router.get("/Admin/departments/new/:Id", isAdmin, controller.departmentsCreate);
+
+	router.get("/Admin/departments/new/", isAdmin, controller.departmentsCreate);
+
+	router.post("/Admin/departments/new/:Id", isAdmin, controller.departmentsNew);
+
+	router.post("/Admin/departments/new/", isAdmin, controller.departmentsNew);
+
 	router.get("/Admin/ads/", isAdmin, controller.ads);
 
 	router.delete("/Admin/ads/", isAdmin, controller.adsDelete);

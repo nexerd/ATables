@@ -2,8 +2,10 @@ var AdModel = require("../model/AdsModel").AdModel;
 var TableModel = require("../model/TablesModel").TableModel;	
 var UserModel = require("../model/UsersModel").UserModel;	
 
-var debugDB = require('../Debug')('ATables:Mongoose:Tables')
-var debugControlelr = require('../Debug')('ATables:Tables')
+var createError = require('http-errors');
+
+var debugDB = require('../Debug')('ATables:Mongoose:Tables');
+var debugControlelr = require('../Debug')('ATables:Tables');
 
 exports.show = function(req, res, next)
 {	

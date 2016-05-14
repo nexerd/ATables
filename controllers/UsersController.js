@@ -2,8 +2,10 @@ var UserModel = require("../model/UsersModel").UserModel;
 var DepartmentModel = require("../model/DepartmentsModel").DepartmentModel;	
 var AdModel = require("../model/AdsModel").AdModel;	
 
-var debugDB = require('../Debug')('ATables:Mongoose:Users')
-var debugControlelr = require('../Debug')('ATables:Users')
+var createError = require('http-errors');
+
+var debugDB = require('../Debug')('ATables:Mongoose:Users');
+var debugControlelr = require('../Debug')('ATables:Users');
 var async = require('async');
 
 exports.create = function (req, res, next) {

@@ -2,11 +2,12 @@ var AdminModel = require("../model/AdminModel").AdminModel;
 var UserModel = require("../model/UsersModel").UserModel;	
 var DepartmentModel = require("../model/DepartmentsModel").DepartmentModel;	
 var AdModel = require("../model/AdsModel").AdModel;	
-	
+var TableModel = require("../model/TablesModel").TableModel;		
+
 var createError = require('http-errors');
 
-var debugDB = require('../Debug')('ATables:Mongoose:Admin')
-var debugControlelr = require('../Debug')('ATables:Admin')
+var debugDB = require('../Debug')('ATables:Mongoose:Admin');
+var debugControlelr = require('../Debug')('ATables:Admin');
 
 exports.rootup = function(req, res, next) {
 	debugControlelr("Admin.rootup");
@@ -122,8 +123,90 @@ exports.departmentsDelete = function(req, res, next) {
 				return next(createError(404, "Department with this id doesn't exist! :("));
 			}
 			debugDB("Secces delete Department: ", Department);
-			debugControlelr("Redirect to url: /Admin/departments/");
-			res.send("/Admin/departments/");
+			TableModel.findOneAndRemove(Department.TableId, function(err ,Table){
+				if (err){
+					debugDB("Error:\n", err)
+					return next(err);
+				}
+				if (!Table){
+					debugControlelr("Can not delete table with id " +  Department.TableId);
+					return next(createError(404, "Table with this id doesn't exist! :("));
+				}
+				debugDB("Secces delete Table: ", Table);
+
+				AdModel.remove({Table: Table._id}, function(err, Ads){
+					if (err){
+						debugDB("Error:\n", err)
+						return next(err);
+					}
+					debugDB("Secces delete Ads: " + Ads);
+					debugControlelr("Redirect to url: /Admin/departments/");
+					res.send("/Admin/departments/");
+				})
+
+			});
+
+			
 		}
 	});
+}
+
+exports.departmentsCreate = function(req, res, next) {
+	debugControlelr("Admin.departmentsDelete");
+	if (!req.params.Id){
+		debugControlelr("render /Admin/departments/new/");
+		res.render("admin/departments_create.jade", { admin: req.user });	
+	}
+
+	DepartmentModel.findById({ _id: req.params.Id}, function(err, Department)
+	{
+		if (err){
+			debugDB("Error:\n", err)
+			return next(err);
+		}
+		else
+		{
+			if (!Department){
+				debugControlelr("Can not find department with id " + req.body.Id);
+				return next(createError(404, "Department with this id doesn't exist! :("));
+			}
+			debugDB("Secces find Department: ", Department);
+			debugControlelr("render /Admin/departments/new/");
+			res.render("admin/departments_create.jade", { admin: req.user, BaseDepartment: Department});	
+		}
+	});
+}
+
+exports.departmentsNew = function(req, res, next) {
+	debugControlelr("Admin.departmentsDelete");
+	var Table = new TableModel({Name: "Какая-то доска объявлений [created by admin]"});
+	Table.save(function(err, _table){
+		if (err){
+			debugDB("Error:\n", err)
+			return next(err);
+		}
+		if (!_table){
+			debugControlelr("Can not create table ");
+			return next(createError(404, "Can not create table"));
+		}
+		debugDB("Secces table crated: ", _table);
+		var Department = new DepartmentModel({
+			Type: req.body.Type,
+			Name: req.body.Name,
+			BaseDepartment: req.params.Id,
+			TableId: _table._id
+		})
+		Department.save(function(err, _department){
+			if (err){
+				debugDB("Error:\n", err)
+				return next(err);
+			}
+			if (!_department){
+				debugControlelr("Can not create department ");
+				return next(createError(404, "Can not create department"));
+			}
+			debugDB("Secces table department: ", _department);
+			res.redirect("/Admin/departments/");
+		});
+	});		
 }

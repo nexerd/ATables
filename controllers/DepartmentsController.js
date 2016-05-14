@@ -1,6 +1,9 @@
 var DepartmentModel = require("../model/DepartmentsModel").DepartmentModel;	
-var debugDB = require('../Debug')('ATables:Mongoose:Departments')
-var debugControlelr = require('../Debug')('ATables:Departments')
+
+var createError = require('http-errors');
+
+var debugDB = require('../Debug')('ATables:Mongoose:Departments');
+var debugControlelr = require('../Debug')('ATables:Departments');
 
 exports.show = function(req, res, next)
 {	

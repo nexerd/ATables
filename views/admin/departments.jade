@@ -6,10 +6,12 @@ block content
 	br
 	br
 	br
+	a(href='/Admin/departments/new/')= 'Добавить главное подразделение'
 	- if (Departments)
 		- each Department in Departments
 			.user
 				.Type= Department.Type
 				.Name= Department.Name
 				.delete_dapartment(value= Department._id)= 'Удалить'
+				a(href='/Admin/departments/new/' + Department._id)= 'Добавить подразделение'
 			br

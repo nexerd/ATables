@@ -1,7 +1,9 @@
-var AdModel = require("../model/AdsModel").AdModel;		
+var AdModel = require("../model/AdsModel").AdModel;	
+
 var createError = require('http-errors');
-var debugDB = require('../Debug')('ATables:Mongoose:Ads')
-var debugControlelr = require('../Debug')('ATables:Ads')
+
+var debugDB = require('../Debug')('ATables:Mongoose:Ads');
+var debugControlelr = require('../Debug')('ATables:Ads');
 
 exports.show = function(req, res, next)
 {		
