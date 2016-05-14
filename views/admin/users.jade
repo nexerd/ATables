@@ -1,0 +1,12 @@
+extends ../layout
+block content
+	br
+	br
+	br
+	- if (Users)
+		- each User in Users
+			.user
+				.FistName= User.FistName
+				.SecondName= User.SecondName
+				.ThirdName= User.ThirdName
+			br

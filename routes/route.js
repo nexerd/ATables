@@ -7,7 +7,8 @@ module.exports = function(passport)
 	AdsRoute(router);
 	DepartmentsRoute(router);
 	UsersRoute(router, passport);
-
+	AdminRoute(router, passport);
+	
 	return router;
 }
 
@@ -85,7 +86,7 @@ function UsersRoute(router, passport)
   		res.redirect('/');
 	});	
 
-	router.post("/Users/login/",  passport.authenticate('login', {		
+	router.post("/Users/login/",  passport.authenticate('signin', {		
 		    successRedirect: '/',
 		    failureRedirect: '/Users/login/',
 		    failureFlash : true 
@@ -95,8 +96,47 @@ function UsersRoute(router, passport)
 	router.get("/User/:Id/" , controller.show);
 }
 
+function AdminRoute(router, passport)
+{
+	var controller = require("../controllers/AdminController");	
+
+	router.get("/Admin/root/", isAdmin, controller.root);
+
+	router.get("/Admin/users/", isAdmin, controller.users);
+
+	router.get("/Admin/departments/", isAdmin, controller.departments);
+
+	router.get("/Admin/ads/", isAdmin, controller.ads);
+
+	router.get("/Admin/ads/:count", isAdmin, controller.ads);
+
+	router.get("/Admin/rootup/", controller.rootup);
+
+	router.post("/Admin/rootup/", passport.authenticate("rootup", {		
+		    successRedirect: '/Admin/root/',
+		    failureRedirect: '/Admin/signup/',
+		    failureFlash : true 
+	  }));	
+
+	router.get("/Admin/rootin/", controller.rootin);
+
+	router.post("/Admin/rootin/", passport.authenticate("rootin", {		
+		    successRedirect: '/Admin/root/',
+		    failureRedirect: '/Admin/rootin/',
+		    failureFlash : true 
+	  }));	
+
+}
+
 function isAuthenticated(req, res, next) {
   if (req.isAuthenticated())
     return next();
+  res.redirect('/');
+}
+
+function isAdmin(req, res, next) {
+  if (req.isAuthenticated() && req.user.isAdmin)
+    return next();
+  console.log(req.user);
   res.redirect('/');
 }

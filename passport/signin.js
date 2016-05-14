@@ -3,7 +3,7 @@ var UserModel = require("../model/UsersModel").UserModel;
 
 module.exports = function(passport){
 
-	passport.use('login', new LocalStrategy({
+	passport.use('signin', new LocalStrategy({
             passReqToCallback : true
         },
         function(req, username, password, done) { 
