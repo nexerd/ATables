@@ -229,13 +229,13 @@ exports.result = function(req ,res, next){
 
 	if (query.text){
 		if (query.Text){
-			select.Text = query.text;
+			select.Text = { $regex: new RegExp(query.text), $options: 'i'};
 		}
 		if (query.Header) {
-			select.Name = query.text;
+			select.Name = { $regex: new RegExp(query.text), $options: 'i'};
 		}
 		if (query.Comment) {
-			select.Comments = { $elemMatch: { Text: query.text }};
+			select.Comments = { $elemMatch: { Text: { $regex: new RegExp(query.text), $options: 'i'} }};
 		}
 	}
 	if (query.from){
@@ -256,7 +256,7 @@ exports.result = function(req ,res, next){
 			debugDB("Error:\n", err)
 			return next(err);
 		}
-		debugDB("Secces! Ads find" +  Ads.length);
+		debugDB("Secces! Ads find  " +  Ads.length);
 		debugControlelr("renerd ads/ad_result.jade");
 		res.render("ads/ad_result.jade", { Ads: Ads, user: req.user });
 	});
