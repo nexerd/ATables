@@ -5,6 +5,8 @@ var createError = require('http-errors');
 var debugDB = require('../Debug')('ATables:Mongoose:Ads');
 var debugControlelr = require('../Debug')('ATables:Ads');
 
+var async = require('async');
+
 exports.show = function(req, res, next)
 {		
 	debugControlelr("Ads.show: ", req.params.Id);
@@ -220,24 +222,7 @@ exports.find = function(req ,res, next){
 	res.render("ads/ad_find.jade");
 };
 
-exports.result = function(req ,res, next){
-	debugControlelr("Ads.result");
-	var query = req.query;
-	debugControlelr(query);
-
-	var select = {};
-
-	if (query.text){
-		if (query.Text){
-			select.Text = { $regex: new RegExp(query.text), $options: 'i'};
-		}
-		if (query.Header) {
-			select.Name = { $regex: new RegExp(query.text), $options: 'i'};
-		}
-		if (query.Comment) {
-			select.Comments = { $elemMatch: { Text: { $regex: new RegExp(query.text), $options: 'i'} }};
-		}
-	}
+function addDateToSelect(query, select){
 	if (query.from){
 		select.Date = {$gt: query.from}
 	}
@@ -249,15 +234,67 @@ exports.result = function(req ,res, next){
 			select.Date = {$lt: query.from}
 		}
 	}
-	debugControlelr(select);
-	AdModel.find(select, function(err, Ads){
-		if (err)
-		{	
-			debugDB("Error:\n", err)
-			return next(err);
+};
+
+exports.result = function(req ,res, next){
+	debugControlelr("Ads.result");
+	var query = req.query;
+	debugControlelr(query);	
+	
+	var selects = [];
+	if (query.text){
+		if (query.Text){
+			var selectT = {};
+			selectT.Text = { $regex: new RegExp(query.text), $options: 'i'};
+			addDateToSelect(query, selectT);
+			selects = selects.concat(selectT);
 		}
-		debugDB("Secces! Ads find  " +  Ads.length);
-		debugControlelr("renerd ads/ad_result.jade");
-		res.render("ads/ad_result.jade", { Ads: Ads, user: req.user });
+		if (query.Header) {
+			var selectH = {};
+			selectH.Name = { $regex: new RegExp(query.text), $options: 'i'};
+			addDateToSelect(query, selectH);
+			selects = selects.concat(selectH);
+		}
+		if (query.Comment) {
+			var selectC = {};
+			selectC.Comments = { $elemMatch: { Text: { $regex: new RegExp(query.text), $options: 'i'} }};
+			addDateToSelect(query, selectC);
+			selects = selects.concat(selectC);
+		}
+	}
+	else{
+		var selectT = {};
+		addDateToSelect(query, selectT);
+		selects = selects.concat(selectT);
+	}
+	debugControlelr(selects);
+	var GlobalAds = [];
+	async.map(selects, function(select, callback){
+		AdModel.find(select, function(err, Ads){
+			if (err)
+			{	
+				debugDB("Error:\n", err)
+				return next(err);
+			}
+			debugDB("Secces! Ads find  " +  Ads.length);
+			GlobalAds = GlobalAds.concat(Ads);
+			callback();
+		});
+	}, function() {
+		var ResAds = [];
+		var key;
+		for (var i=0; i<GlobalAds.length; i++)
+		{
+			key = true;
+			for (var j=0; j<ResAds.length; j++)
+			if (GlobalAds[i]._id.toString() == ResAds[j]._id.toString()){
+				key = false;
+				break;
+			}
+			if (key)
+				ResAds.push(GlobalAds[i]);
+		}
+		debugControlelr("End find: Ads " + ResAds.length);
+		res.render("ads/ad_result.jade", {Ads: ResAds, user: req.user});
 	});
 };
