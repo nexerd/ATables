@@ -214,3 +214,50 @@ exports.updateComment = function(req, res, next){
 		}
 	});	
 };
+
+exports.find = function(req ,res, next){
+	debugControlelr("Ads.find");
+	res.render("ads/ad_find.jade");
+};
+
+exports.result = function(req ,res, next){
+	debugControlelr("Ads.result");
+	var query = req.query;
+	debugControlelr(query);
+
+	var select = {};
+
+	if (query.text){
+		if (query.Text){
+			select.Text = query.text;
+		}
+		if (query.Header) {
+			select.Name = query.text;
+		}
+		if (query.Comment) {
+			select.Comments = { $elemMatch: { Text: query.text }};
+		}
+	}
+	if (query.from){
+		select.Date = {$gt: query.from}
+	}
+	if (query.to){
+		if (select.Date){
+			select.Date.$lt = query.to;
+		}
+		else{
+			select.Date = {$lt: query.from}
+		}
+	}
+	debugControlelr(select);
+	AdModel.find(select, function(err, Ads){
+		if (err)
+		{	
+			debugDB("Error:\n", err)
+			return next(err);
+		}
+		debugDB("Secces! Ads find" +  Ads.length);
+		debugControlelr("renerd ads/ad_result.jade");
+		res.render("ads/ad_result.jade", { Ads: Ads, user: req.user });
+	});
+};

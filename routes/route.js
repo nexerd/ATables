@@ -40,6 +40,10 @@ function AdsRoute(router)
 {
 	var controller = require("../controllers/AdsController");
 
+	router.get("/Ads/find/" , controller.find);
+
+	router.get("/Ads/result/" , controller.result);
+
 	router.get("/Ads/:Id/" , controller.show);
 
 	// Id = TableId

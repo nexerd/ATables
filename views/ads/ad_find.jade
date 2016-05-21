@@ -1,0 +1,30 @@
+extends ../layout
+block content
+	br
+	br
+	br
+	br
+	#main
+		form(method='get' action='/Ads/result/')
+			p
+				input(type="text" name="text" placeholder="Какие-то слова")
+			p
+				Искать:
+			p
+				input(type="checkbox" checked name="Header")
+				label(for="Header")В заголовках
+			p
+				input(type="checkbox" name="Text")
+				label(for="Text")В тексте
+			p
+				input(type="checkbox" name="Comment")
+				label(for="Comment")В коментариях
+			p	Дата публикации
+			p
+				label(for="from")С 
+				input(type="date" name="from")
+			p
+				label(for="to")По
+				input(type="date" name="to")
+			p
+				input(type="submit" value="Поиск")
