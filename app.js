@@ -57,7 +57,7 @@ var initPassport = require('./passport/init');
 initPassport(passport);
 
 var routes = require("./routes/route")(passport);
-app.use('/', routes);
+app.use(routes);
 
 app.get("/", function(req, res, next) {
   res.render("index.jade", {

@@ -3,6 +3,7 @@ var router = express.Router();
 
 module.exports = function(passport)
 {	
+	FooterRoute(router);
 	TablesRoute(router);
 	AdsRoute(router);
 	DepartmentsRoute(router);
@@ -10,6 +11,20 @@ module.exports = function(passport)
 	AdminRoute(router, passport);
 	
 	return router;
+}
+
+function FooterRoute(router){
+	router.get("/help", function(req, res){ 
+		res.render("footer/help.jade");
+	});
+
+	router.get("/callback", function(req, res){ 
+		res.render("footer/callback.jade");
+	});
+
+	router.get("/developers", function(req, res){ 
+		res.render("footer/developers.jade");
+	});
 }
 
 function TablesRoute(router)
