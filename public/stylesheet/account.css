@@ -4,8 +4,20 @@
 
 #user{
 	margin: 10px;
+	background: rgba(33, 67, 165, 0.5);	 
+
 }
 
 #user div{
 	margin-top: 4px;
 }
+
+#departments{
+	margin-top: 4px;
+	background: rgba(33, 67, 165, 0.5);	
+}
+
+#departments div{
+	margin-top: 4px;
+}
+

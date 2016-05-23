@@ -12,7 +12,7 @@ block content
 			.bottom
 				.tag #{Ad.Tag}
 				.user #{Ad.User.Name}
-				.date #{Ad.Date}
+				.date #{Ad.getDate()}
 				- if (user && Ad.User.Id.toString() == user._id.toString())
 					.update= 'Редактировать'
 					.delete= 'Удалить'
@@ -25,11 +25,12 @@ block content
 					.comment
 						.comment_user= 'Автор: ' + Comment.User.Name
 						.comment_text(value=numberOfComment)= Comment.Text
-						.comment_date= Comment.Data
+						.comment_date= Ad.getCommentDate(numberOfComment)
 						- if (user && Comment.User.Id.toString() == user._id.toString())
 							.comment_update(value=numberOfComment)= 'Редактировать'
 							.comment_delete(value=numberOfComment)= 'Удалить'
 						- numberOfComment++
 		form(id="NewCommentForm")
-			textarea(type="text" required name="commentText" id="commentText" placeholder="Коментарий")
-			input(type="submit" value="Добавить")
+			textarea(type="text" required name="commentText" id="commentText" placeholder="Коментарий" rows=7 cols=80)
+			p
+				input(type="submit" value="Добавить")

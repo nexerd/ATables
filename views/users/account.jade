@@ -7,15 +7,16 @@ block content
 		include ../../public/javascript/account.js
 	#main
 		#user
-			#FirstName #{user.FirstName}
-			#SecondName #{user.SecondName}
-			#ThirdName #{user.ThirdName}
+			#FirstName Имя: #{user.FirstName}
+			#SecondName Фамилия: #{user.SecondName}
+			#ThirdName Отчество: #{user.ThirdName}
 		#departments
 			Подразделения:
 			- if (user.Departments)
 				- each department in user.Departments
 					.department(value= department.DocDepartment._id)
-						.department_type= department.DocDepartment.Type
-						.department_name= department.DocDepartment.Name
+						.department_type= 'Тип:' + department.DocDepartment.Type
+						.department_name= 'Наздвание:' + department.DocDepartment.Name
 						.department_delete(value= department.DocDepartment._id)= 'Удалить'
+					br
 		#addDepartment Добавить

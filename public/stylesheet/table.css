@@ -1,9 +1,8 @@
 div.ad {
     margin: 10px;
     background-color: rgba(212, 223, 255, 0.29);
-    border-radius: 20px;
     min-height: 150px;
-    max-width: 1000px;	
+    max-width: 1800px;	
 }
 
 div#ads{
@@ -21,8 +20,6 @@ div.topic{
 	text-align: center;
 	border-bottom: 1px #DEDEDE solid;
 	background-color: rgba(33, 67, 165, 0.29);	
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
 }
 
 div.buttom{

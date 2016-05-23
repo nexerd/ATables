@@ -111,8 +111,6 @@ function UsersRoute(router, passport)
 		    failureFlash : true 
 	  })
 	);
-
-	router.get("/User/:Id/" , controller.show);
 }
 
 function AdminRoute(router, passport)

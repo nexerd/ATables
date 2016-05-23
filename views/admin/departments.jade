@@ -3,15 +3,13 @@ block content
 	script(type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js")
 	script(type="text/javascript")
 		include ../../public/javascript/root_departments.js
-	br
-	br
-	br
-	a(href='/Admin/departments/new/')= 'Добавить главное подразделение'
-	- if (Departments)
-		- each Department in Departments
-			.user
-				.Type= Department.Type
-				.Name= Department.Name
-				.delete_dapartment(value= Department._id)= 'Удалить'
-				a(href='/Admin/departments/new/' + Department._id)= 'Добавить подразделение'
-			br
+	#main
+		a(href='/Admin/departments/new/')= 'Добавить главное подразделение'
+		- if (Departments)
+			- each Department in Departments
+				.user
+					.Type= Department.Type
+					.Name= Department.Name
+					.delete_dapartment(value= Department._id)= 'Удалить'
+					a(href='/Admin/departments/new/' + Department._id)= 'Добавить подразделение'
+				br

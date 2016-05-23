@@ -1,7 +1,10 @@
 var path = require("path");
 var nconf = require('nconf');
 
-process.env.DEBUG = 'ATables:*';
+if (nconf.get('NODE_ENV') != 'production'){
+	process.env.DEBUG = 'ATables:*';
+}
+
 var debug = require('../Debug')('ATables:nconf')
 
 nconf.argv()

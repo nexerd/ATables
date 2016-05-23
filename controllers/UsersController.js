@@ -23,9 +23,6 @@ exports.account = function(req, res, next){
 	res.render("users/account.jade", {user: req.user} );
 };
 
-exports.show = function(req, res, next){
-	console.log("Заглушка");
-};
 
 exports.updateDepartment = function(req, res, next){
 	debugControlelr("Users.updateDepartment", req.body.Id);

@@ -63,7 +63,7 @@ exports.new = function(req, res, next)
 exports.create = function(req, res, next)
 {
 	debugControlelr("Ads.create in table: ", req.params.Id);
-	res.render("ads/ad_create.jade", { _tableId: req.params.Id })
+	res.render("ads/ad_create.jade", { _tableId: req.params.Id, user: req.user  })
 }
 
 exports.update = function(req, res, next)
@@ -219,7 +219,7 @@ exports.updateComment = function(req, res, next){
 
 exports.find = function(req ,res, next){
 	debugControlelr("Ads.find");
-	res.render("ads/ad_find.jade");
+	res.render("ads/ad_find.jade", {user: req.user });
 };
 
 function addDateToSelect(query, select){

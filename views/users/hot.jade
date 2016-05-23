@@ -1,7 +1,7 @@
 extends ../layout
 block content
 	style
-		include ../../public/stylesheet/hot.css
+		include ../../public/stylesheet/table.css
 	#main
 		#Ads
 			- if (Ads)
@@ -12,5 +12,5 @@ block content
 						.text= Ad.Text
 						.buttom
 							.tag= 'Метка: ' + Ad.Tag
-							.date= Ad.Date
+							.date= Ad.getDate()
 							.user= 'Автор: ' + Ad.User.Name

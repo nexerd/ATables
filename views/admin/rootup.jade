@@ -1,13 +1,12 @@
 extends ../layout
 block content	
-	br
-	br
-	form#rootup(action="/Admin/rootup/" method="post") 	
-		p Логин:
-		p
-			input(type="text" required name="username")
-		p Пароль:
-		p
-			input(type="password" required name="password")
-		p
-			input(type="submit" value="Отправить")
+	#main
+		form#rootup(action="/Admin/rootup/" method="post") 	
+			p Логин:
+			p
+				input(type="text" required name="username")
+			p Пароль:
+			p
+				input(type="password" required name="password")
+			p
+				input(type="submit" value="Отправить")

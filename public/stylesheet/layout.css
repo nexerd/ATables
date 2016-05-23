@@ -1,0 +1,6 @@
+div#main {
+    min-height: 600px;
+    min-width: 800px;
+    margin-top: 40px;
+    background: #F2F2F5;
+}

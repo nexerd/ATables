@@ -5,20 +5,21 @@ block content
 	script(type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js")
 	script(type="text/javascript")
 		include ../../public/javascript/table.js
-	h1 Доска объявлений: #{Table.Name}	
-	#table_id(hidden="true" value=Table._id) 
-	form(action="/Ads/create/" + Table._id method="get")
-		input(type="submit" value="Добавить объявление")
-	#ads
-		- if (Ads)
-			- each Ad in Ads
-				.ad
-					.topic
-						a(href="/Ads/" + Ad._id)= Ad.Name
-					.text= Ad.Text
-					.buttom
-						.tag= 'Метка: ' + Ad.Tag
-						.date= Ad.Date
-						.user= 'Автор: ' + Ad.User.Name
-	- if(next)
-		#next= 'Следующие 10'	
+	#main
+		h1 Доска объявлений: #{Table.Name}	
+		#table_id(hidden="true" value=Table._id) 
+		form(action="/Ads/create/" + Table._id method="get")
+			input(type="submit" value="Добавить объявление")
+		#ads
+			- if (Ads)
+				- each Ad in Ads
+					.ad
+						.topic
+							a(href="/Ads/" + Ad._id)= 'Тема:  ' + Ad.Name
+						.text= Ad.getText()
+						.buttom
+							.tag= 'Метка: ' + Ad.Tag
+							.date= Ad.getDate()
+							.user= 'Автор: ' + Ad.User.Name
+		- if(next)
+			#next= 'Следующие 10'	

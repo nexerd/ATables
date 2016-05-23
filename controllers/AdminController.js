@@ -179,7 +179,8 @@ exports.departmentsCreate = function(req, res, next) {
 
 exports.departmentsNew = function(req, res, next) {
 	debugControlelr("Admin.departmentsDelete");
-	var Table = new TableModel({Name: "Какая-то доска объявлений [created by admin]"});
+	var Table = new TableModel({Name: "Какая-то доска объявлений отделения: " +
+	 req.body.Type + "  " + req.body.Name});
 	Table.save(function(err, _table){
 		if (err){
 			debugDB("Error:\n", err)
