@@ -3,10 +3,10 @@ block content
 	#main
 		form(action="/Ads/new/" + _tableId method="post") 	
 			p
-				input(type="text" required name="Name" placeholder="Заголовок")
+				input(type="text" required name="Name" placeholder="Заголовок" size=100)
 			p
-				textarea(name="Text" required placeholder="Текс объявления")
+				textarea(name="Text" required placeholder="Текс объявления" rows=12 cols=101)
 			p
-				input(type="text" required name="Tag" placeholder="#Тэг")
+				input(type="text" required name="Tag" placeholder="#Тэг" size=100)
 			p
 				input(type="submit" required value="Отправить")

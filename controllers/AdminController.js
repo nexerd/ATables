@@ -179,7 +179,7 @@ exports.departmentsCreate = function(req, res, next) {
 
 exports.departmentsNew = function(req, res, next) {
 	debugControlelr("Admin.departmentsDelete");
-	var Table = new TableModel({Name: "Какая-то доска объявлений отделения: " +
+	var Table = new TableModel({Name: "Доска объявлений отделения: " +
 	 req.body.Type + "  " + req.body.Name});
 	Table.save(function(err, _table){
 		if (err){
